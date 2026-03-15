@@ -1,0 +1,309 @@
+================================================================================
+N8N FIX - QUICK ACTION GUIDE
+================================================================================
+
+PROBLEM: Email is static/hardcoded instead of dynamic
+SOLUTION: Update n8n Gmail node configuration (5 minutes)
+
+================================================================================
+QUICK FIX (5 MINUTES)
+================================================================================
+
+1. OPEN N8N WORKFLOW
+   Go to: https://kishorsanthoshkumar.app.n8n.cloud
+   Open: worker-application workflow
+
+2. CLICK GMAIL NODE
+   Find the Gmail node in your workflow
+   Click on it to open configuration
+
+3. UPDATE "TO" FIELD
+   Current: hardcoded@example.com (or similar)
+   Change to: {{ $json.company_email }}
+   
+   This sends email to the company that posted the job
+
+4. UPDATE "SUBJECT" FIELD
+   Current: "New Job Application" (static)
+   Change to: New Job Application - {{ $json.job_title }} Position
+   
+   Example output: "New Job Application - Plumber Position"
+
+5. UPDATE "BODY" FIELD
+   Replace hardcoded content with dynamic variables
+   
+   Use this template:
+   
+   Hello {{ $json.company_name }},
+   
+   A worker has applied for your job on SkillLink.
+   
+   Worker Details:
+   Name: {{ $json.worker_name }}
+   Email: {{ $json.worker_email }}
+   Trade: {{ $json.trade }}
+   Experience: {{ $json.experience }}
+   Location: {{ $json.location }}
+   
+   Job Details:
+   Position: {{ $json.job_title }}
+   Company: {{ $json.company_name }}
+   Location: {{ $json.company_location }}
+   
+   Please log in to SkillLink to review the application.
+   
+   Regards,
+   SkillLink Team
+
+6. SAVE WORKFLOW
+   Click "Save" button
+   Workflow is now updated
+
+7. TEST WORKFLOW
+   Click "Test" on Webhook node
+   Click "Execute" to run workflow
+   Check Gmail inbox for email
+   Verify all variables are replaced
+
+================================================================================
+DETAILED STEPS WITH SCREENSHOTS
+================================================================================
+
+STEP 1: OPEN N8N
+┌─────────────────────────────────────────────────────────────┐
+│ Browser                                                     │
+│ URL: https://kishorsanthoshkumar.app.n8n.cloud              │
+│                                                              │
+│ n8n Dashboard                                               │
+│ ├─ Workflows                                                │
+│ │  ├─ worker-application ← Click this                       │
+│ │  └─ job-accepted                                          │
+│ └─ ...                                                      │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 2: OPEN WORKFLOW
+┌─────────────────────────────────────────────────────────────┐
+│ worker-application Workflow                                 │
+│                                                              │
+│ [Webhook] ──→ [Gmail] ──→ [Response]                        │
+│                                                              │
+│ Click on Gmail node (middle node)                           │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 3: CONFIGURE GMAIL NODE
+┌─────────────────────────────────────────────────────────────┐
+│ Gmail Node Configuration Panel                              │
+│                                                              │
+│ Credentials: [Gmail Account] ✓                              │
+│                                                              │
+│ To: [________________________]                              │
+│     {{ $json.company_email }}                               │
+│                                                              │
+│ Subject: [________________________]                         │
+│          New Job Application - {{ $json.job_title }}        │
+│          Position                                           │
+│                                                              │
+│ Body (HTML): [________________________]                     │
+│              [Paste template below]                         │
+│                                                              │
+│ [Save] [Cancel]                                             │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 4: PASTE EMAIL TEMPLATE
+┌─────────────────────────────────────────────────────────────┐
+│ In the Body field, paste:                                   │
+│                                                              │
+│ <html>                                                      │
+│   <body style="font-family: Arial; line-height: 1.6;">      │
+│     <h2>New Job Application</h2>                            │
+│                                                              │
+│     <p>Hello {{ $json.company_name }},</p>                  │
+│                                                              │
+│     <p>A worker has applied for your job on SkillLink.</p>  │
+│                                                              │
+│     <h3>Worker Details</h3>                                 │
+│     <ul>                                                    │
+│       <li>Name: {{ $json.worker_name }}</li>                │
+│       <li>Email: {{ $json.worker_email }}</li>              │
+│       <li>Trade: {{ $json.trade }}</li>                     │
+│       <li>Experience: {{ $json.experience }}</li>           │
+│       <li>Location: {{ $json.location }}</li>               │
+│     </ul>                                                   │
+│                                                              │
+│     <h3>Job Details</h3>                                    │
+│     <ul>                                                    │
+│       <li>Position: {{ $json.job_title }}</li>              │
+│       <li>Company: {{ $json.company_name }}</li>            │
+│       <li>Location: {{ $json.company_location }}</li>       │
+│     </ul>                                                   │
+│                                                              │
+│     <p>Please log in to SkillLink to review the             │
+│     application.</p>                                        │
+│                                                              │
+│     <p>Regards,<br>SkillLink Team</p>                       │
+│   </body>                                                   │
+│ </html>                                                     │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 5: SAVE CONFIGURATION
+┌─────────────────────────────────────────────────────────────┐
+│ Click [Save] button                                         │
+│ Configuration is saved                                      │
+│ Gmail node now uses dynamic variables                       │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 6: TEST WORKFLOW
+┌─────────────────────────────────────────────────────────────┐
+│ Workflow                                                    │
+│                                                              │
+│ [Webhook] ──→ [Gmail] ──→ [Response]                        │
+│    ↑                                                        │
+│    Click "Test" button                                      │
+│                                                              │
+│ Webhook Test Output:                                        │
+│ {                                                           │
+│   "worker_name": "KISHOR.S",                                │
+│   "worker_email": "kishor@example.com",                     │
+│   "trade": "mechanic",                                      │
+│   "experience": "5-10 years",                               │
+│   "location": "Pondicherry, villianur",                     │
+│   "job_title": "Plumber",                                   │
+│   "company_name": "ABC Construction",                       │
+│   "company_email": "hiring@abcconstruction.com",            │
+│   "company_location": "Mumbai"                              │
+│ }                                                           │
+│                                                              │
+│ ✅ Payload looks correct                                    │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 7: EXECUTE WORKFLOW
+┌─────────────────────────────────────────────────────────────┐
+│ Click [Execute] button                                      │
+│ Workflow runs                                               │
+│ Gmail node sends email                                      │
+│ Check Gmail inbox                                           │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 8: VERIFY EMAIL
+┌─────────────────────────────────────────────────────────────┐
+│ Gmail Inbox                                                 │
+│                                                              │
+│ From: SkillLink <noreply@skilllink.com>                     │
+│ To: hiring@abcconstruction.com ✅ (Dynamic)                 │
+│ Subject: New Job Application - Plumber Position ✅          │
+│                                                              │
+│ Body:                                                       │
+│ Hello ABC Construction,                                     │
+│                                                              │
+│ A worker has applied for your job on SkillLink.             │
+│                                                              │
+│ Worker Details                                              │
+│ • Name: KISHOR.S ✅ (Dynamic)                               │
+│ • Email: kishor@example.com ✅ (Dynamic)                    │
+│ • Trade: mechanic ✅ (Dynamic)                              │
+│ • Experience: 5-10 years ✅ (Dynamic)                       │
+│ • Location: Pondicherry, villianur ✅ (Dynamic)             │
+│                                                              │
+│ Job Details                                                 │
+│ • Position: Plumber ✅ (Dynamic)                            │
+│ • Company: ABC Construction ✅ (Dynamic)                    │
+│ • Location: Mumbai ✅ (Dynamic)                             │
+│                                                              │
+│ ✅ ALL VARIABLES REPLACED CORRECTLY!                        │
+└─────────────────────────────────────────────────────────────┘
+
+================================================================================
+VARIABLE REFERENCE - COPY/PASTE
+================================================================================
+
+WORKER VARIABLES:
+{{ $json.worker_name }}      → Worker's full name
+{{ $json.worker_email }}     → Worker's email
+{{ $json.trade }}            → Worker's trade
+{{ $json.experience }}       → Years of experience
+{{ $json.location }}         → Worker's location
+
+JOB VARIABLES:
+{{ $json.job_title }}        → Job title/position
+
+COMPANY VARIABLES:
+{{ $json.company_name }}     → Company name
+{{ $json.company_email }}    → Company email (recipient)
+{{ $json.company_location }} → Company location
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+PROBLEM: Email still shows hardcoded values
+SOLUTION:
+1. Verify Gmail node configuration was saved
+2. Check if variables use {{ }} (double curly braces)
+3. Check if field names are spelled correctly
+4. Execute workflow again
+5. Check Gmail inbox for new email
+
+PROBLEM: Email not received
+SOLUTION:
+1. Check Gmail credentials are correct
+2. Check if Gmail node is connected to Webhook
+3. Check n8n execution history for errors
+4. Check Gmail spam folder
+5. Verify Gmail account has permission to send
+
+PROBLEM: Variables show as blank
+SOLUTION:
+1. Check if webhook is receiving data
+2. Verify field names match payload exactly
+3. Check for typos in variable names
+4. Execute workflow with test data
+5. Check n8n logs for errors
+
+PROBLEM: Email goes to wrong address
+SOLUTION:
+1. Verify "To" field uses {{ $json.company_email }}
+2. Check if company_email is in webhook payload
+3. Verify company email is correct in database
+4. Test with different company
+
+================================================================================
+VERIFICATION CHECKLIST
+================================================================================
+
+Before considering this complete:
+
+☑ Gmail node "To" field: {{ $json.company_email }}
+☑ Gmail node "Subject" field: Uses {{ $json.job_title }}
+☑ Gmail node "Body" field: Uses all variables
+☑ All variables use {{ }} syntax
+☑ All field names match payload
+☑ No hardcoded values in template
+☑ Workflow saved successfully
+☑ Test workflow executed successfully
+☑ Email received with dynamic data
+☑ All variables replaced correctly
+☑ Email sent to correct company
+☑ Email subject includes job title
+☑ Email body includes all worker details
+☑ Email body includes all company details
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. Apply this fix to n8n Gmail node
+2. Test with multiple companies
+3. Verify emails are personalized
+4. Monitor email delivery
+5. Collect feedback from companies
+
+================================================================================
+SUPPORT
+================================================================================
+
+For detailed information, see:
+- N8N_GMAIL_CONFIGURATION_FIX.txt (Complete guide)
+- N8N_GMAIL_NODE_SETUP_VISUAL.txt (Visual guide)
+- WEBHOOK_PAYLOAD_REFERENCE.txt (Payload structure)
+
+================================================================================

@@ -1,0 +1,166 @@
+================================================================================
+WEBHOOK SYSTEM - QUICK REFERENCE CARD
+================================================================================
+
+TWO WEBHOOKS
+================================================================================
+
+1. WORKER APPLICATION → COMPANY EMAIL
+   URL: /webhook/worker-application
+   Status: ✅ ACTIVE
+   Trigger: Worker applies to job
+   Recipient: Company
+
+2. JOB ACCEPTANCE → WORKER EMAIL
+   URL: /webhook/job-accepted
+   Status: ⏳ NEEDS ACTIVATION
+   Trigger: Company accepts application
+   Recipient: Worker
+
+================================================================================
+TESTING
+================================================================================
+
+Test Both:        test_all_webhooks.bat
+Test Webhook 1:   python test_n8n_webhook.py
+Test Webhook 2:   python test_job_acceptance_webhook.py
+View Logs:        python view_application_logs.py
+
+================================================================================
+N8N SETUP
+================================================================================
+
+Dashboard: https://kishorsanthoshkumar.app.n8n.cloud/
+
+Workflow 1: ✅ ACTIVE
+- Name: Worker Application Email
+- Path: worker-application
+- Gmail to: {{ $json.company_email }}
+
+Workflow 2: ⏳ NEEDS SETUP
+- Name: Job Acceptance Email
+- Path: job-accepted
+- Gmail to: {{ $json.worker_email }}
+
+================================================================================
+BACKEND ENDPOINTS
+================================================================================
+
+Apply to Job:
+POST /jobs/{job_id}/apply
+- Saves application
+- Notifies company (in-app)
+- Triggers webhook 1 (email to company)
+
+Accept Application:
+PATCH /applications/{application_id}/accept
+- Updates status
+- Notifies worker (in-app)
+- Triggers webhook 2 (email to worker)
+
+================================================================================
+PAYLOADS
+================================================================================
+
+Webhook 1 (Worker Application):
+{
+  "worker_name": "...",
+  "trade": "...",
+  "experience": "...",
+  "location": "...",
+  "job_title": "...",
+  "company_email": "..."
+}
+
+Webhook 2 (Job Acceptance):
+{
+  "worker_name": "...",
+  "worker_email": "...",
+  "job_title": "...",
+  "company_name": "...",
+  "company_email": "...",
+  "company_location": "...",
+  "contact_phone": "..."
+}
+
+================================================================================
+LOGGING
+================================================================================
+
+Table: application_logs
+- Worker application logs: Normal status
+- Job acceptance logs: Status starts with "ACCEPTANCE:"
+
+View: python view_application_logs.py
+Shows: Type, worker, job, status, response code, errors
+
+================================================================================
+ERROR HANDLING
+================================================================================
+
+✓ Application/Acceptance always saved
+✓ In-app notifications always work
+✓ Email failures logged but don't break flow
+✓ Fallback values for missing data
+✓ 10-second timeout protection
+
+================================================================================
+CONSOLE LOGS
+================================================================================
+
+Worker Application:
+📝 Worker X applying to job Y
+🔔 Triggering n8n webhook
+✅ n8n webhook SUCCESS - Status: 200
+
+Job Acceptance:
+🎯 Company X accepting application Y
+🚀 Triggering job acceptance webhook
+✅ Job acceptance webhook SUCCESS - Status: 200
+
+================================================================================
+RESTART COMMANDS
+================================================================================
+
+Backend:  restart_backend.bat
+Frontend: restart_frontend.bat
+
+================================================================================
+DOCUMENTATION
+================================================================================
+
+Overview:         DUAL_WEBHOOK_SYSTEM_COMPLETE.txt
+Flow Diagram:     EMAIL_NOTIFICATION_FLOW.txt
+Webhook 1 Docs:   N8N_INTEGRATION_SUCCESS.txt
+Webhook 2 Docs:   JOB_ACCEPTANCE_EMAIL_COMPLETE.txt
+This Card:        WEBHOOK_QUICK_REFERENCE.txt
+
+================================================================================
+STATUS CHECKLIST
+================================================================================
+
+Backend Integration:
+[✅] Webhook 1 code
+[✅] Webhook 2 code
+[✅] Logging system
+[✅] Error handling
+
+N8N Workflows:
+[✅] Webhook 1 active
+[⏳] Webhook 2 needs activation
+
+Testing:
+[✅] Webhook 1 tested (200 OK)
+[⏳] Webhook 2 needs testing
+[⏳] Full flow needs testing
+
+================================================================================
+NEXT ACTION
+================================================================================
+
+1. Activate n8n workflow for job acceptance
+2. Run: python test_job_acceptance_webhook.py
+3. Test full flow: Apply → Accept
+4. Verify both emails received
+
+================================================================================

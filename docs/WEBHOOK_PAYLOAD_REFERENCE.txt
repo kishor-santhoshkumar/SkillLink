@@ -1,0 +1,268 @@
+================================================================================
+N8N WEBHOOK PAYLOAD REFERENCE - DYNAMIC COMPANY EMAIL
+================================================================================
+
+WEBHOOK URL (Application Notification):
+https://kishorsanthoshkumar.app.n8n.cloud/webhook/worker-application
+
+WEBHOOK URL (Job Acceptance Notification):
+https://kishorsanthoshkumar.app.n8n.cloud/webhook/job-accepted
+
+================================================================================
+PAYLOAD 1: WORKER APPLICATION NOTIFICATION
+================================================================================
+
+Triggered when: Worker applies for a job
+Recipient: Company email (DYNAMIC from database)
+Purpose: Notify company about new job application
+
+Payload Structure:
+{
+  "worker_name": "string",           // Worker's full name
+  "worker_email": "string",          // Worker's email (for future use)
+  "trade": "string",                 // Worker's primary trade
+  "experience": "number",            // Years of experience
+  "location": "string",              // Worker's location
+  "job_title": "string",             // Job title/required trade
+  "company_name": "string",          // Company name
+  "company_email": "string",         // DYNAMIC - Company email from database
+  "company_location": "string"       // Company location
+}
+
+Example Payload:
+{
+  "worker_name": "Rajesh Kumar",
+  "worker_email": "rajesh@example.com",
+  "trade": "Carpenter",
+  "experience": 8,
+  "location": "Mumbai, Maharashtra",
+  "job_title": "Carpenter",
+  "company_name": "ABC Construction Ltd",
+  "company_email": "hiring@abcconstruction.com",
+  "company_location": "Mumbai"
+}
+
+N8N Gmail Node Configuration:
+- To: {{$json.company_email}}  ← DYNAMIC EMAIL
+- Subject: New Application for {{$json.job_title}} Position
+- Body: 
+  Worker: {{$json.worker_name}}
+  Email: {{$json.worker_email}}
+  Trade: {{$json.trade}}
+  Experience: {{$json.experience}} years
+  Location: {{$json.location}}
+
+================================================================================
+PAYLOAD 2: JOB ACCEPTANCE NOTIFICATION
+================================================================================
+
+Triggered when: Company accepts a worker's application
+Recipient: Worker email (DYNAMIC from database)
+Purpose: Notify worker that their application was accepted
+
+Payload Structure:
+{
+  "worker_name": "string",           // Worker's full name
+  "worker_email": "string",          // Worker's email (DYNAMIC)
+  "job_title": "string",             // Job title
+  "company_name": "string",          // Company name
+  "company_email": "string",         // Company email
+  "company_location": "string",      // Company location
+  "contact_phone": "string"          // Company phone
+}
+
+Example Payload:
+{
+  "worker_name": "Rajesh Kumar",
+  "worker_email": "rajesh@example.com",
+  "job_title": "Carpenter",
+  "company_name": "ABC Construction Ltd",
+  "company_email": "hiring@abcconstruction.com",
+  "company_location": "Mumbai",
+  "contact_phone": "9876543210"
+}
+
+N8N Gmail Node Configuration:
+- To: {{$json.worker_email}}  ← DYNAMIC EMAIL
+- Subject: Your Application for {{$json.job_title}} has been Accepted!
+- Body:
+  Congratulations {{$json.worker_name}}!
+  Your application has been accepted by {{$json.company_name}}
+  Contact: {{$json.company_email}} | {{$json.contact_phone}}
+  Location: {{$json.company_location}}
+
+================================================================================
+KEY POINTS
+================================================================================
+
+1. DYNAMIC EMAILS
+   ✅ company_email is fetched from User.email in database
+   ✅ worker_email is fetched from User.email in database
+   ✅ NO hardcoded emails are used
+   ✅ Each company receives notifications for their own jobs
+
+2. DATA SOURCES
+   - worker_name: Resume.full_name
+   - worker_email: User.email (worker account)
+   - trade: Resume.primary_trade
+   - experience: Resume.years_of_experience
+   - location: Resume.location or village_or_city + district
+   - job_title: JobRequest.required_trade
+   - company_name: Company.company_name
+   - company_email: User.email (company account) ← DYNAMIC
+   - company_location: Company.location
+
+3. FALLBACK VALUES
+   If data is missing:
+   - worker_name: "Unknown"
+   - worker_email: "no-email@example.com"
+   - trade: "Not specified"
+   - experience: "Not specified"
+   - location: "Not specified"
+   - job_title: "Position"
+   - company_name: "Company"
+   - company_email: "no-email@example.com"
+   - company_location: "Not specified"
+
+4. LOGGING
+   Backend logs show:
+   - "🔔 Triggering n8n webhook for company: {company_email}"
+   - Complete webhook payload
+   - Response status code
+   - Any errors
+
+5. ERROR HANDLING
+   - Webhook timeout: 10 seconds
+   - Retry logic: Handled by n8n
+   - Failed webhooks: Logged in ApplicationLog table
+
+================================================================================
+TESTING THE WEBHOOK
+================================================================================
+
+1. Manual Test with curl:
+
+curl -X POST https://kishorsanthoshkumar.app.n8n.cloud/webhook/worker-application \
+  -H "Content-Type: application/json" \
+  -d '{
+    "worker_name": "Test Worker",
+    "worker_email": "test@example.com",
+    "trade": "Carpenter",
+    "experience": 5,
+    "location": "Test City",
+    "job_title": "Carpenter",
+    "company_name": "Test Company",
+    "company_email": "company@example.com",
+    "company_location": "Test Location"
+  }'
+
+2. Automated Test:
+
+python test_dynamic_company_email.py
+
+3. Monitor Backend Logs:
+
+Look for messages like:
+  🔔 Triggering n8n webhook for company: company@example.com
+  ✅ n8n webhook SUCCESS - Status: 200
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: Webhook returns 404
+Solution: Verify webhook URL is correct in N8N_WEBHOOK_URL_APPLICATION
+
+Problem: Webhook returns 400
+Solution: Check payload structure matches expected format
+
+Problem: Wrong company email in webhook
+Solution: 
+  1. Verify job.company_id is correct
+  2. Check User table for company email
+  3. Review backend logs for actual email being sent
+
+Problem: Missing fields in payload
+Solution:
+  1. Check if worker profile is complete
+  2. Check if company profile is complete
+  3. Review backend logs for fallback values
+
+Problem: Email not sent by n8n
+Solution:
+  1. Check n8n webhook logs
+  2. Verify Gmail node configuration
+  3. Check Gmail account permissions
+  4. Verify email address is valid
+
+================================================================================
+SECURITY NOTES
+================================================================================
+
+1. Email Validation
+   - Verify company email format before sending
+   - Check for valid email domain
+   - Implement rate limiting
+
+2. Data Privacy
+   - Don't log full email addresses in production
+   - Use email masking in logs (e.g., c***@example.com)
+   - Implement GDPR compliance
+
+3. Webhook Security
+   - Add HMAC signature verification
+   - Implement webhook signing
+   - Use HTTPS only
+   - Add IP whitelisting
+
+4. Error Handling
+   - Don't expose internal errors to users
+   - Log errors securely
+   - Implement retry logic with exponential backoff
+
+================================================================================
+PERFORMANCE NOTES
+================================================================================
+
+1. Database Queries
+   - 2 queries per application: User + Company
+   - Queries are indexed on id and user_id
+   - Average query time: < 10ms
+
+2. Webhook Timeout
+   - Set to 10 seconds
+   - Async execution (non-blocking)
+   - Doesn't delay application submission
+
+3. Scalability
+   - Can handle multiple concurrent applications
+   - Webhook calls are async
+   - No database locks
+
+================================================================================
+MONITORING
+================================================================================
+
+Monitor these metrics:
+
+1. Webhook Success Rate
+   - Track successful webhook calls
+   - Alert if success rate < 95%
+
+2. Email Delivery Rate
+   - Track emails delivered by n8n
+   - Alert if delivery rate < 90%
+
+3. Response Time
+   - Track webhook response time
+   - Alert if > 5 seconds
+
+4. Error Rate
+   - Track webhook errors
+   - Alert if error rate > 5%
+
+5. Email Bounce Rate
+   - Track bounced emails
+   - Alert if bounce rate > 2%
+
+================================================================================

@@ -1,0 +1,258 @@
+================================================================================
+EMAIL SYSTEM - HOW IT WORKS
+================================================================================
+
+PROBLEM SOLVED:
+Both worker and company were receiving emails at the same address (230697.ad@rmkec.ac.in)
+instead of their individual login emails.
+
+SOLUTION:
+The system now ONLY uses the email from the users table (User.email) - the email
+they used during registration/login.
+
+================================================================================
+EMAIL SOURCE - USERS TABLE ONLY
+================================================================================
+
+✅ CORRECT: User.email (from users table)
+   - This is the email used during registration/login
+   - This is what the system now uses for ALL webhooks
+   - Each user has their own unique email
+
+❌ WRONG: Company.email (from companies table)
+   - This is just profile information
+   - NOT used for webhooks anymore
+   - Can be different from login email
+
+================================================================================
+TWO TABLES, TWO PURPOSES
+================================================================================
+
+Table 1: users
+--------------
+Purpose: Authentication and system communications
+Fields:
+  - id
+  - username
+  - email ← THIS IS USED FOR WEBHOOKS
+  - phone_number
+  - role (worker or company)
+  - hashed_password
+
+Table 2: companies
+------------------
+Purpose: Company profile information only
+Fields:
+  - id
+  - user_id (links to users table)
+  - company_name
+  - email ← NOT USED FOR WEBHOOKS (just profile info)
+  - location
+  - phone
+
+================================================================================
+WEBHOOK EMAIL LOGIC
+================================================================================
+
+Webhook 1: Worker Application → Company Email
+----------------------------------------------
+When: Worker applies to job
+Recipient: Company
+Email Source: 
+  1. Get job.company_id
+  2. Find User where User.id = job.company_id
+  3. Use User.email ✅
+
+Code:
+company_user = db.query(User).filter(User.id == job.company_id).first()
+company_email = company_user.email
+
+Webhook 2: Job Acceptance → Worker Email
+-----------------------------------------
+When: Company accepts application
+Recipients: Worker AND Company contact info
+Email Sources:
+  1. Worker email: User.email (from worker's User record) ✅
+  2. Company email: User.email (from company's User record) ✅
+
+Code:
+worker_user = db.query(User).filter(User.id == worker_resume.user_id).first()
+worker_email = worker_user.email
+
+company_email = current_user.email  # current_user is from User table ✅
+
+================================================================================
+EXAMPLE SCENARIO
+================================================================================
+
+User Registration:
+------------------
+Worker registers:
+  - Username: aravind_kumar
+  - Email: aravind@gmail.com ← Stored in users.email
+  - Role: worker
+
+Company registers:
+  - Username: abc_construction
+  - Email: company@abcconstruction.com ← Stored in users.email
+  - Role: company
+
+Company creates profile:
+  - Company name: ABC Construction
+  - Company email: info@abcconstruction.com ← Stored in companies.email
+  - Location: Chennai
+
+Email Flow:
+-----------
+1. Worker applies to job
+   → Email sent to: company@abcconstruction.com ✅ (from users.email)
+   → NOT sent to: info@abcconstruction.com ❌ (companies.email ignored)
+
+2. Company accepts application
+   → Worker email: aravind@gmail.com ✅ (from users.email)
+   → Company contact in email: company@abcconstruction.com ✅ (from users.email)
+
+================================================================================
+WHY THIS DESIGN?
+================================================================================
+
+✓ Security: Uses authenticated email (the one they logged in with)
+✓ Reliability: Email is verified during registration
+✓ Consistency: Same email for login and notifications
+✓ Privacy: Users control their notification email
+✓ Simplicity: One source of truth for email
+
+================================================================================
+CHECKING YOUR EMAILS
+================================================================================
+
+Run this command to see all user emails:
+python check_user_emails.py
+
+Output shows:
+- User ID and username
+- Role (worker or company)
+- User email (used for webhooks) ✅
+- Company email (profile only, not used for webhooks)
+- Warnings if emails don't match
+
+================================================================================
+UPDATING USER EMAIL
+================================================================================
+
+If a user needs to change their email:
+
+Option 1: Update via script
+python update_user_email.py
+
+Option 2: Update directly in database
+UPDATE users SET email = 'newemail@example.com' WHERE id = X;
+
+⚠️  IMPORTANT: Update users.email, NOT companies.email
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: Emails going to wrong address
+Solution: Check users.email in database
+Command: python check_user_emails.py
+
+Problem: User has no email set
+Solution: Update users.email
+Command: python update_user_email.py
+
+Problem: Company.email is different from User.email
+Solution: This is OK! User.email is used for webhooks.
+          Company.email is just profile information.
+
+Problem: Both users receiving same email
+Solution: Check that each user has unique email in users.email
+Command: python check_user_emails.py
+
+================================================================================
+DATABASE QUERIES
+================================================================================
+
+Check all user emails:
+SELECT id, username, role, email FROM users;
+
+Check company emails (profile only):
+SELECT u.username, u.email as user_email, c.email as company_email 
+FROM users u 
+LEFT JOIN companies c ON c.user_id = u.id 
+WHERE u.role = 'company';
+
+Update user email:
+UPDATE users SET email = 'newemail@example.com' WHERE id = X;
+
+================================================================================
+CODE CHANGES MADE
+================================================================================
+
+File: app/routers/job.py
+
+Change 1: accept_application endpoint
+---------------------------------------
+BEFORE:
+company_data = {
+    "email": company.email if company and company.email else current_user.email
+}
+
+AFTER:
+company_data = {
+    "email": current_user.email  # ONLY use User.email
+}
+
+Change 2: apply_to_job endpoint
+--------------------------------
+Already correct - uses User.email:
+company_user = db.query(User).filter(User.id == job.company_id).first()
+company_email = company_user.email
+
+================================================================================
+TESTING
+================================================================================
+
+Test 1: Check current emails
+python check_user_emails.py
+
+Test 2: Update email if needed
+python update_user_email.py
+
+Test 3: Test worker application
+1. Worker applies to job
+2. Check company's User.email inbox
+3. Should receive "New Worker Application" email
+
+Test 4: Test job acceptance
+1. Company accepts application
+2. Check worker's User.email inbox
+3. Should receive "Application Accepted" email
+4. Email should show company's User.email as contact
+
+================================================================================
+SUMMARY
+================================================================================
+
+✅ FIXED: Emails now go to correct addresses
+✅ SOURCE: User.email (from users table) ONLY
+✅ WORKER: Receives email at their login email
+✅ COMPANY: Receives email at their login email
+✅ VERIFIED: Each user gets their own email
+✅ IGNORED: Company.email (companies table) not used
+
+The email system now works correctly!
+Each user receives emails at the address they used during registration/login.
+
+================================================================================
+QUICK COMMANDS
+================================================================================
+
+Check emails:     python check_user_emails.py
+Update email:     python update_user_email.py
+View logs:        python view_application_logs.py
+Test webhooks:    test_all_webhooks.bat
+Restart backend:  restart_backend.bat
+
+================================================================================

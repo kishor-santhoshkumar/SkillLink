@@ -1,0 +1,291 @@
+================================================================================
+DYNAMIC COMPANY EMAIL IMPLEMENTATION - COMPLETE
+================================================================================
+
+PROJECT: SkillLink Platform
+OBJECTIVE: Replace hardcoded company email with dynamic email fetched from database
+STATUS: ✅ IMPLEMENTED AND READY FOR TESTING
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+Previously, when a worker applied for a job, the webhook always sent notifications
+to a hardcoded email address (230697.ad@rmkec.ac.in), regardless of which company
+posted the job.
+
+This was incorrect because:
+- Different companies should receive notifications for their own job applications
+- The hardcoded email doesn't represent the actual company
+- No personalization or proper routing of notifications
+
+================================================================================
+SOLUTION IMPLEMENTED
+================================================================================
+
+1️⃣ DYNAMIC COMPANY EMAIL FETCHING
+   Location: app/routers/job.py - apply_to_job() function (line ~580)
+   
+   Process:
+   a) When worker applies to job:
+      - Fetch job from database using job_id
+      - Get company_id from job record
+      - Query User table using company_id to get company's registered email
+      - Use company_user.email as the notification recipient
+   
+   Code:
+   ```python
+   company_user = db.query(User).filter(User.id == job.company_id).first()
+   company_email = company_user.email if company_user and company_user.email else "no-email@example.com"
+   ```
+
+2️⃣ ENHANCED WEBHOOK PAYLOAD
+   Location: app/routers/job.py - trigger_n8n_webhook() function (line ~35)
+   
+   Updated payload now includes ALL required fields:
+   - worker_name: Full name of the worker
+   - worker_email: Email of the worker (for future confirmations)
+   - trade: Worker's primary trade/skill
+   - experience: Years of experience
+   - location: Worker's location
+   - job_title: Job title/required trade
+   - company_name: Name of the company
+   - company_email: DYNAMIC email from database (NOT hardcoded)
+   - company_location: Company's location
+   
+   Example payload:
+   ```json
+   {
+     "worker_name": "John Doe",
+     "worker_email": "john@example.com",
+     "trade": "Carpenter",
+     "experience": 5,
+     "location": "Mumbai, Maharashtra",
+     "job_title": "Carpenter",
+     "company_name": "ABC Construction",
+     "company_email": "company@example.com",
+     "company_location": "Mumbai"
+   }
+   ```
+
+3️⃣ COMPANY DATA RETRIEVAL
+   Location: app/routers/job.py - apply_to_job() function (line ~600)
+   
+   Before triggering webhook, the system now:
+   - Queries User table for company email
+   - Queries Company table for company details (name, location)
+   - Builds complete company_data dictionary
+   - Passes to webhook function
+   
+   Code:
+   ```python
+   company_user = db.query(User).filter(User.id == job.company_id).first()
+   company = db.query(Company).filter(Company.user_id == job.company_id).first()
+   
+   company_data = {
+       "company_name": company.company_name if company else company_user.username,
+       "email": company_email,
+       "location": company.location if company else job.location
+   }
+   ```
+
+4️⃣ WEBHOOK FUNCTION SIGNATURE UPDATE
+   Old: trigger_n8n_webhook(worker_data, job_data, company_email)
+   New: trigger_n8n_webhook(worker_data, job_data, company_data)
+   
+   Reason: Passing complete company_data dict instead of just email
+   allows for more flexibility and includes all company information
+
+================================================================================
+FILES MODIFIED
+================================================================================
+
+1. app/routers/job.py
+   - Updated trigger_n8n_webhook() function signature (line 35)
+   - Updated webhook payload to include all required fields (line 48-57)
+   - Updated apply_to_job() function to fetch company data (line 580-610)
+   - Updated webhook call to pass company_data dict (line 615)
+
+================================================================================
+KEY FEATURES
+================================================================================
+
+✅ NO HARDCODED EMAILS
+   - All company emails are fetched from User.email in database
+   - Fallback to "no-email@example.com" if email not set
+   - Each company receives notifications for their own jobs
+
+✅ COMPLETE WORKER INFORMATION
+   - Worker email included for future confirmations
+   - Worker trade, experience, and location included
+   - Enables personalized email templates in n8n
+
+✅ COMPLETE COMPANY INFORMATION
+   - Company name, email, and location included
+   - Enables proper email routing and personalization
+   - Supports multi-company scenarios
+
+✅ ERROR HANDLING
+   - Graceful fallbacks if company data missing
+   - Proper logging of all webhook triggers
+   - ApplicationLog table records all webhook attempts
+
+✅ LOGGING & DEBUGGING
+   - Detailed logs show which company email is being used
+   - Webhook payload logged for debugging
+   - Response codes and errors captured
+
+================================================================================
+WORKFLOW DIAGRAM
+================================================================================
+
+Worker Applies to Job
+        ↓
+Backend receives /jobs/{job_id}/apply request
+        ↓
+Fetch Job from database (get company_id)
+        ↓
+Fetch Company User from database (get email)
+        ↓
+Fetch Company Profile from database (get name, location)
+        ↓
+Build webhook payload with DYNAMIC company email
+        ↓
+Trigger n8n webhook with complete data
+        ↓
+n8n receives webhook with correct company email
+        ↓
+n8n Gmail node sends email to company_email (DYNAMIC)
+        ↓
+Company receives notification for their job application
+
+================================================================================
+TESTING
+================================================================================
+
+Run the test script to verify implementation:
+
+Command:
+  python test_dynamic_company_email.py
+
+What it tests:
+  1. Register a company with email: company@example.com
+  2. Register a worker with email: worker@example.com
+  3. Create worker profile
+  4. Create company profile
+  5. Post a job
+  6. Worker applies to job
+  7. Verify webhook receives correct company email
+
+Expected output:
+  ✅ Company registered with email: company@example.com
+  ✅ Worker registered with email: worker@example.com
+  ✅ Job posted
+  ✅ Application submitted
+  ✅ Webhook triggered with company_email: company@example.com
+
+================================================================================
+VERIFICATION CHECKLIST
+================================================================================
+
+Before deployment, verify:
+
+☑ Company email is fetched from User.email (not hardcoded)
+☑ Worker email is included in webhook payload
+☑ Company name is fetched from Company table
+☑ Company location is included in payload
+☑ Webhook payload includes all 9 required fields
+☑ Fallback values exist for missing data
+☑ Logging shows correct company email
+☑ ApplicationLog records webhook attempts
+☑ Multiple companies can post jobs and receive separate notifications
+☑ No hardcoded email addresses remain in code
+
+================================================================================
+WEBHOOK PAYLOAD FIELDS
+================================================================================
+
+Field Name          | Source                    | Required | Example
+--------------------|---------------------------|----------|------------------
+worker_name         | Resume.full_name          | Yes      | "John Doe"
+worker_email        | User.email (worker)       | Yes      | "john@example.com"
+trade               | Resume.primary_trade      | Yes      | "Carpenter"
+experience          | Resume.years_of_experience| Yes      | 5
+location            | Resume.location           | Yes      | "Mumbai, Maharashtra"
+job_title           | JobRequest.required_trade | Yes      | "Carpenter"
+company_name        | Company.company_name      | Yes      | "ABC Construction"
+company_email       | User.email (company)      | Yes      | "company@example.com"
+company_location    | Company.location          | Yes      | "Mumbai"
+
+================================================================================
+FUTURE ENHANCEMENTS
+================================================================================
+
+1. Email validation: Verify company email is valid before sending
+2. Email templates: Create personalized templates per company
+3. Email history: Track all emails sent to each company
+4. Retry logic: Retry failed webhook attempts
+5. Rate limiting: Prevent webhook spam
+6. Webhook signatures: Add HMAC signatures for security
+
+================================================================================
+DEPLOYMENT NOTES
+================================================================================
+
+1. Restart backend server after code changes:
+   - Kill all uvicorn processes
+   - Run: python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+2. Test with multiple companies:
+   - Create 2+ companies with different emails
+   - Post jobs from each company
+   - Have workers apply to jobs
+   - Verify each company receives notifications for their jobs
+
+3. Monitor logs:
+   - Check for "🔔 Triggering n8n webhook for company:" messages
+   - Verify company_email matches expected email
+   - Check for any "no-email@example.com" fallbacks
+
+4. Verify n8n webhook:
+   - Check n8n webhook logs
+   - Verify payload includes all required fields
+   - Test email sending from n8n
+
+================================================================================
+SUPPORT & TROUBLESHOOTING
+================================================================================
+
+Issue: Company not receiving emails
+Solution: 
+  1. Check if company email is set in User table
+  2. Check backend logs for webhook trigger status
+  3. Check n8n webhook logs for errors
+  4. Verify n8n Gmail node configuration
+
+Issue: Wrong company receiving email
+Solution:
+  1. Verify job.company_id is correct
+  2. Check User table for correct email mapping
+  3. Review ApplicationLog for webhook payload
+
+Issue: Missing worker email in notification
+Solution:
+  1. Verify worker User.email is set
+  2. Check if worker profile was created
+  3. Review webhook payload in logs
+
+================================================================================
+CONCLUSION
+================================================================================
+
+✅ Dynamic company email implementation is COMPLETE
+✅ No hardcoded emails are used
+✅ Each company receives notifications for their own jobs
+✅ Complete worker and company information is included
+✅ System is ready for testing and deployment
+
+The SkillLink platform now properly routes job application notifications
+to the correct company email address based on who posted the job.
+
+================================================================================

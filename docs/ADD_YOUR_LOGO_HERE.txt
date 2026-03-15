@@ -1,0 +1,74 @@
+================================================================================
+📸 ADD YOUR LOGO HERE
+================================================================================
+
+SIMPLE 3-STEP PROCESS:
+================================================================================
+
+STEP 1: Save your logo file
+----------------------------
+Location: frontend/public/logo.png
+
+Just copy your logo image to:
+E:\skillLink\frontend\public\logo.png
+
+Supported formats: .png, .svg, .jpg, .jpeg
+
+
+STEP 2: Restart frontend
+----------------------------
+Run: restart_frontend.bat
+
+Or manually:
+cd frontend
+npm run dev
+
+
+STEP 3: Done! ✅
+----------------------------
+Your logo will automatically appear in:
+✓ Header (top center)
+✓ Sidebar (top left)
+✓ All pages
+
+
+================================================================================
+LOGO SPECIFICATIONS (RECOMMENDED):
+================================================================================
+
+Size: 40px height (width will auto-scale)
+Format: PNG with transparent background (best)
+Alternative: SVG (scales perfectly at any size)
+File size: Under 100KB recommended
+
+
+================================================================================
+FALLBACK BEHAVIOR:
+================================================================================
+
+If logo file is not found:
+- Header shows gradient "S" icon + "SkillLink" text
+- Sidebar shows "SkillLink" text only
+- Everything still works perfectly!
+
+
+================================================================================
+CURRENT STATUS:
+================================================================================
+
+✅ Code updated to use /logo.png
+✅ Fallback design in place
+⏳ Waiting for your logo file at: frontend/public/logo.png
+
+
+================================================================================
+NEED DIFFERENT LOCATION?
+================================================================================
+
+If you want to use a different path, just tell me:
+"Logo is at [your-path]"
+
+And I'll update the code to point there!
+
+
+================================================================================

@@ -1,0 +1,356 @@
+================================================================================
+N8N EMAIL TEMPLATE - READY TO COPY/PASTE
+================================================================================
+
+Use this template in your n8n Gmail node Body field.
+Just copy and paste - no modifications needed!
+
+================================================================================
+GMAIL NODE CONFIGURATION
+================================================================================
+
+TO FIELD:
+{{ $json.company_email }}
+
+SUBJECT FIELD:
+New Job Application - {{ $json.job_title }} Position
+
+================================================================================
+BODY FIELD - PROFESSIONAL HTML TEMPLATE
+================================================================================
+
+Copy everything below and paste into the Body field:
+
+---START COPY HERE---
+
+<html>
+  <head>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        overflow: hidden;
+      }
+      .header {
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .header p {
+        margin: 5px 0 0 0;
+        font-size: 14px;
+        opacity: 0.9;
+      }
+      .content {
+        padding: 30px 20px;
+      }
+      .greeting {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      .section {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-left: 4px solid #1e40af;
+        margin: 20px 0;
+        border-radius: 4px;
+      }
+      .section h3 {
+        margin-top: 0;
+        color: #1e40af;
+        font-size: 16px;
+      }
+      .section p {
+        margin: 8px 0;
+        font-size: 14px;
+      }
+      .section strong {
+        color: #1e40af;
+      }
+      .cta-button {
+        display: inline-block;
+        background-color: #1e40af;
+        color: white;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        margin: 20px 0;
+        text-align: center;
+      }
+      .cta-button:hover {
+        background-color: #1e3a8a;
+      }
+      .footer {
+        background-color: #f8f9fa;
+        padding: 20px;
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+        border-top: 1px solid #e0e0e0;
+      }
+      .footer a {
+        color: #1e40af;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+      <!-- Header -->
+      <div class="header">
+        <h1>New Job Application</h1>
+        <p>SkillLink Platform</p>
+      </div>
+
+      <!-- Main Content -->
+      <div class="content">
+        
+        <!-- Greeting -->
+        <div class="greeting">
+          <p>Hello <strong>{{ $json.company_name }}</strong>,</p>
+          <p>A worker has applied for your job on SkillLink. Here are the details:</p>
+        </div>
+
+        <!-- Worker Details Section -->
+        <div class="section">
+          <h3>👤 Worker Details</h3>
+          <p><strong>Name:</strong> {{ $json.worker_name }}</p>
+          <p><strong>Email:</strong> {{ $json.worker_email }}</p>
+          <p><strong>Trade/Skill:</strong> {{ $json.trade }}</p>
+          <p><strong>Experience:</strong> {{ $json.experience }}</p>
+          <p><strong>Location:</strong> {{ $json.location }}</p>
+        </div>
+
+        <!-- Job Details Section -->
+        <div class="section">
+          <h3>💼 Job Details</h3>
+          <p><strong>Position:</strong> {{ $json.job_title }}</p>
+          <p><strong>Your Company:</strong> {{ $json.company_name }}</p>
+          <p><strong>Location:</strong> {{ $json.company_location }}</p>
+        </div>
+
+        <!-- Call to Action -->
+        <div style="text-align: center;">
+          <a href="http://localhost:3000/company/my-workers" class="cta-button">
+            Review Application
+          </a>
+        </div>
+
+        <!-- Additional Info -->
+        <p style="margin-top: 20px; font-size: 14px; color: #666;">
+          Please log in to SkillLink to review the worker profile and take action on this application.
+        </p>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p style="margin: 0;">© 2026 SkillLink. All rights reserved.</p>
+        <p style="margin: 5px 0 0 0;">
+          <a href="http://localhost:3000">Visit SkillLink</a>
+        </p>
+      </div>
+
+    </div>
+  </body>
+</html>
+
+---END COPY HERE---
+
+================================================================================
+SIMPLE TEXT TEMPLATE (Alternative)
+================================================================================
+
+If you prefer plain text instead of HTML, use this:
+
+---START COPY HERE---
+
+Hello {{ $json.company_name }},
+
+A worker has applied for your job on SkillLink. Here are the details:
+
+WORKER DETAILS
+==============
+Name: {{ $json.worker_name }}
+Email: {{ $json.worker_email }}
+Trade/Skill: {{ $json.trade }}
+Experience: {{ $json.experience }}
+Location: {{ $json.location }}
+
+JOB DETAILS
+===========
+Position: {{ $json.job_title }}
+Your Company: {{ $json.company_name }}
+Location: {{ $json.company_location }}
+
+Please log in to SkillLink to review the worker profile and take action on this application.
+
+Regards,
+SkillLink Team
+
+---END COPY HERE---
+
+================================================================================
+HOW TO USE THIS TEMPLATE
+================================================================================
+
+1. Open n8n workflow: worker-application
+2. Click on Gmail node
+3. Set "To" field to: {{ $json.company_email }}
+4. Set "Subject" field to: New Job Application - {{ $json.job_title }} Position
+5. Click in "Body" field
+6. Delete any existing content
+7. Copy the template above (HTML or Text)
+8. Paste into Body field
+9. Click Save
+10. Test workflow
+
+================================================================================
+VARIABLES USED IN TEMPLATE
+================================================================================
+
+{{ $json.worker_name }}      → Worker's full name
+{{ $json.worker_email }}     → Worker's email address
+{{ $json.trade }}            → Worker's trade/skill
+{{ $json.experience }}       → Years of experience
+{{ $json.location }}         → Worker's location
+{{ $json.job_title }}        → Job title/position
+{{ $json.company_name }}     → Company name
+{{ $json.company_email }}    → Company email (To field)
+{{ $json.company_location }} → Company location
+
+================================================================================
+EXAMPLE OUTPUT
+================================================================================
+
+When workflow runs with this data:
+{
+  "worker_name": "KISHOR.S",
+  "worker_email": "kishor@example.com",
+  "trade": "mechanic",
+  "experience": "5-10 years",
+  "location": "Pondicherry, villianur",
+  "job_title": "Plumber",
+  "company_name": "ABC Construction",
+  "company_email": "hiring@abcconstruction.com",
+  "company_location": "Mumbai"
+}
+
+The email will be:
+
+TO: hiring@abcconstruction.com
+SUBJECT: New Job Application - Plumber Position
+
+BODY:
+Hello ABC Construction,
+
+A worker has applied for your job on SkillLink. Here are the details:
+
+WORKER DETAILS
+==============
+Name: KISHOR.S
+Email: kishor@example.com
+Trade/Skill: mechanic
+Experience: 5-10 years
+Location: Pondicherry, villianur
+
+JOB DETAILS
+===========
+Position: Plumber
+Your Company: ABC Construction
+Location: Mumbai
+
+Please log in to SkillLink to review the worker profile and take action on this application.
+
+Regards,
+SkillLink Team
+
+================================================================================
+CUSTOMIZATION OPTIONS
+================================================================================
+
+You can customize the template by:
+
+1. Changing colors:
+   Replace #1e40af with your brand color
+   Replace #3b82f6 with your secondary color
+
+2. Changing fonts:
+   Replace 'Segoe UI' with your preferred font
+
+3. Adding company logo:
+   Add <img src="your-logo-url" /> in header
+
+4. Changing button text:
+   Replace "Review Application" with custom text
+
+5. Changing button URL:
+   Replace "http://localhost:3000/company/my-workers" with your URL
+
+6. Adding more sections:
+   Copy a section div and modify as needed
+
+7. Changing emojis:
+   Replace 👤 and 💼 with other emojis
+
+================================================================================
+TESTING THE TEMPLATE
+================================================================================
+
+1. In n8n, click "Test" on Webhook node
+2. Verify payload shows all variables
+3. Click "Execute" to run workflow
+4. Check Gmail inbox
+5. Verify email looks professional
+6. Verify all variables are replaced
+7. Click links to verify they work
+8. Test with different companies
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+PROBLEM: Variables show as blank
+SOLUTION: Check if field names match payload exactly
+
+PROBLEM: Email looks broken/misaligned
+SOLUTION: Check if HTML is properly formatted
+
+PROBLEM: Variables not replaced
+SOLUTION: Verify {{ }} syntax (double curly braces)
+
+PROBLEM: Email not received
+SOLUTION: Check Gmail credentials and permissions
+
+PROBLEM: Button doesn't work
+SOLUTION: Verify URL is correct and accessible
+
+================================================================================
+SUPPORT
+================================================================================
+
+For more information:
+- N8N_FIX_ACTION_GUIDE.txt (Quick fix guide)
+- N8N_GMAIL_CONFIGURATION_FIX.txt (Detailed guide)
+- N8N_GMAIL_NODE_SETUP_VISUAL.txt (Visual guide)
+- WEBHOOK_PAYLOAD_REFERENCE.txt (Payload structure)
+
+================================================================================

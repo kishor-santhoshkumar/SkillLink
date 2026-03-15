@@ -1,0 +1,356 @@
+================================================================================
+EMAIL NOTIFICATION FLOW DIAGRAM
+================================================================================
+
+SCENARIO 1: WORKER APPLIES TO JOB
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          WORKER APPLIES TO JOB                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Worker clicks "Apply Now"     │
+                    │   on job listing                │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Frontend sends POST request   │
+                    │   to /jobs/{job_id}/apply       │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Backend validates:            │
+                    │   - User is worker              │
+                    │   - Job exists and is open      │
+                    │   - Worker has profile          │
+                    │   - Not already applied         │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Save to job_applications      │
+                    │   Status: "pending"             │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Create in-app notification    │
+                    │   for company                   │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   🔔 TRIGGER WEBHOOK 1          │
+                    │   URL: /webhook/worker-         │
+                    │        application              │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   n8n receives webhook          │
+                    │   Sends email to company        │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   📧 Company receives email:    │
+                    │   "New Worker Application"      │
+                    │   - Worker name                 │
+                    │   - Trade & experience          │
+                    │   - Location                    │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Log webhook result in         │
+                    │   application_logs table        │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Return success to frontend    │
+                    │   Worker sees confirmation      │
+                    └─────────────────────────────────┘
+
+
+SCENARIO 2: COMPANY ACCEPTS APPLICATION
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      COMPANY ACCEPTS APPLICATION                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Company clicks "Accept"       │
+                    │   button on application         │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Frontend sends PATCH request  │
+                    │   to /applications/{id}/accept  │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Backend validates:            │
+                    │   - User is company             │
+                    │   - Application exists          │
+                    │   - Job belongs to company      │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Update application status     │
+                    │   Status: "accepted"            │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Create in-app notification    │
+                    │   for worker                    │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Gather data:                  │
+                    │   - Worker info (name, email)   │
+                    │   - Job info (title)            │
+                    │   - Company info (name, phone)  │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   🎉 TRIGGER WEBHOOK 2          │
+                    │   URL: /webhook/job-accepted    │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   n8n receives webhook          │
+                    │   Sends email to worker         │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   📧 Worker receives email:     │
+                    │   "Application Accepted!"       │
+                    │   - Job title                   │
+                    │   - Company name                │
+                    │   - Company location            │
+                    │   - Contact phone               │
+                    │   - Company email               │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Log webhook result in         │
+                    │   application_logs table        │
+                    │   (prefixed with "ACCEPTANCE:") │
+                    └─────────────────────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Return success to frontend    │
+                    │   Company sees confirmation     │
+                    └─────────────────────────────────┘
+
+
+COMPLETE END-TO-END FLOW
+================================================================================
+
+Worker                  Backend                 n8n                 Company
+  │                       │                      │                     │
+  │  1. Apply to job      │                      │                     │
+  ├──────────────────────>│                      │                     │
+  │                       │                      │                     │
+  │                       │  2. Save application │                     │
+  │                       │  3. Create notif     │                     │
+  │                       │                      │                     │
+  │                       │  4. Trigger webhook  │                     │
+  │                       ├─────────────────────>│                     │
+  │                       │                      │                     │
+  │                       │                      │  5. Send email      │
+  │                       │                      ├────────────────────>│
+  │                       │                      │                     │
+  │  6. Success response  │                      │                     │
+  │<──────────────────────┤                      │                     │
+  │                       │                      │                     │
+  │                       │                      │                     │
+  │                       │                      │  7. Review app      │
+  │                       │  8. Accept worker    │                     │
+  │                       │<─────────────────────┼─────────────────────┤
+  │                       │                      │                     │
+  │                       │  9. Update status    │                     │
+  │                       │  10. Create notif    │                     │
+  │                       │                      │                     │
+  │                       │  11. Trigger webhook │                     │
+  │                       ├─────────────────────>│                     │
+  │                       │                      │                     │
+  │  12. Receive email    │                      │  13. Send email     │
+  │<──────────────────────┼──────────────────────┤                     │
+  │                       │                      │                     │
+  │                       │  14. Success response│                     │
+  │                       ├─────────────────────────────────────────────>│
+  │                       │                      │                     │
+
+
+DATA FLOW
+================================================================================
+
+Webhook 1 Payload (Worker Application):
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ {                                                                           │
+│   "worker_name": "Aravind Kumar",          ← Resume.full_name              │
+│   "trade": "Carpenter",                    ← Resume.primary_trade          │
+│   "experience": "8 years",                 ← Resume.years_of_experience    │
+│   "location": "Chennai, Tamil Nadu",       ← Resume.location               │
+│   "job_title": "Senior Carpenter",         ← JobRequest.required_trade     │
+│   "company_email": "company@example.com"   ← User.email (company)          │
+│ }                                                                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Webhook 2 Payload (Job Acceptance):
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ {                                                                           │
+│   "worker_name": "Aravind Kumar",          ← Resume.full_name              │
+│   "worker_email": "worker@example.com",    ← User.email (worker)           │
+│   "job_title": "Senior Carpenter",         ← JobRequest.required_trade     │
+│   "company_name": "ABC Construction",      ← Company.company_name          │
+│   "company_email": "company@example.com",  ← Company.email                 │
+│   "company_location": "Chennai",           ← Company.location              │
+│   "contact_phone": "+91 98765 43210"       ← Company.phone                 │
+│ }                                                                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+ERROR HANDLING FLOW
+================================================================================
+
+                    ┌─────────────────────────────────┐
+                    │   Trigger webhook               │
+                    └─────────────────────────────────┘
+                                      │
+                    ┌─────────────────┴─────────────────┐
+                    │                                   │
+                    ▼                                   ▼
+        ┌───────────────────────┐         ┌───────────────────────┐
+        │   Success (200 OK)    │         │   Error (4xx/5xx)     │
+        └───────────────────────┘         └───────────────────────┘
+                    │                                   │
+                    ▼                                   ▼
+        ┌───────────────────────┐         ┌───────────────────────┐
+        │   Log success         │         │   Log error           │
+        │   Email sent ✅       │         │   Email failed ❌     │
+        └───────────────────────┘         └───────────────────────┘
+                    │                                   │
+                    └─────────────────┬─────────────────┘
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │   Application/Acceptance        │
+                    │   ALWAYS saved ✅               │
+                    │   In-app notification ✅        │
+                    │   User flow continues ✅        │
+                    └─────────────────────────────────┘
+
+
+LOGGING SYSTEM
+================================================================================
+
+application_logs table:
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ id | worker_id | job_id | application_id | email_trigger_status           │
+├────┼───────────┼────────┼────────────────┼────────────────────────────────┤
+│ 1  │    12     │   5    │      10        │ Webhook triggered successfully │
+│ 2  │    12     │   5    │      10        │ ACCEPTANCE: Acceptance webhook │
+│    │           │        │                │ triggered successfully         │
+├────┼───────────┼────────┼────────────────┼────────────────────────────────┤
+│    webhook_response_code | webhook_response_body | error_message | created│
+├──────────────────────────┼───────────────────────┼───────────────┼────────┤
+│         200              │ {"message":"..."}     │     NULL      │ 2026...│
+│         200              │ {"message":"..."}     │     NULL      │ 2026...│
+└──────────────────────────┴───────────────────────┴───────────────┴────────┘
+
+Identification:
+- Normal status → Worker Application webhook
+- Status starts with "ACCEPTANCE:" → Job Acceptance webhook
+
+
+NOTIFICATION SYSTEM
+================================================================================
+
+In-App Notifications (notifications table):
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Notification 1: Worker applies                                             │
+│ ├─ user_id: company_id                                                     │
+│ ├─ title: "New Job Application"                                            │
+│ ├─ message: "Worker applied for Carpenter position"                        │
+│ ├─ type: "job_application"                                                 │
+│ └─ is_read: false                                                          │
+│                                                                             │
+│ Notification 2: Company accepts                                            │
+│ ├─ user_id: worker_user_id                                                 │
+│ ├─ title: "Application Accepted!"                                          │
+│ ├─ message: "Your application for Carpenter position has been accepted"   │
+│ ├─ type: "application_accepted"                                            │
+│ └─ is_read: false                                                          │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Email Notifications (via n8n):
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Email 1: To company                                                         │
+│ ├─ Subject: "New Worker Application - SkillLink"                           │
+│ ├─ To: company@example.com                                                 │
+│ └─ Content: Worker details + job info                                      │
+│                                                                             │
+│ Email 2: To worker                                                          │
+│ ├─ Subject: "Congratulations! Your Job Application Has Been Accepted"     │
+│ ├─ To: worker@example.com                                                  │
+│ └─ Content: Job details + company contact info                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+SYSTEM ARCHITECTURE
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            SKILLLINK PLATFORM                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌─────────────────┐         ┌─────────────────┐         ┌──────────────┐ │
+│  │   React         │         │   FastAPI       │         │  PostgreSQL  │ │
+│  │   Frontend      │◄───────►│   Backend       │◄───────►│  Database    │ │
+│  │   (Port 3000)   │         │   (Port 8000)   │         │              │ │
+│  └─────────────────┘         └─────────────────┘         └──────────────┘ │
+│                                       │                                     │
+│                                       │ HTTP POST                           │
+│                                       │ (Webhooks)                          │
+│                                       ▼                                     │
+│                              ┌─────────────────┐                           │
+│                              │   n8n Cloud     │                           │
+│                              │   Automation    │                           │
+│                              └─────────────────┘                           │
+│                                       │                                     │
+│                                       │ SMTP                                │
+│                                       ▼                                     │
+│                              ┌─────────────────┐                           │
+│                              │   Gmail         │                           │
+│                              │   Email Service │                           │
+│                              └─────────────────┘                           │
+│                                       │                                     │
+│                    ┌──────────────────┴──────────────────┐                │
+│                    ▼                                      ▼                │
+│           ┌─────────────────┐                   ┌─────────────────┐       │
+│           │  Company Email  │                   │  Worker Email   │       │
+│           │  Inbox          │                   │  Inbox          │       │
+│           └─────────────────┘                   └─────────────────┘       │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================

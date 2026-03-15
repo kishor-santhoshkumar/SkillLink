@@ -1,0 +1,330 @@
+================================================================================
+N8N GMAIL NODE SETUP - VISUAL GUIDE
+================================================================================
+
+PROBLEM: Static email instead of dynamic data
+SOLUTION: Configure Gmail node to use webhook variables
+
+================================================================================
+CURRENT WORKFLOW (WRONG)
+================================================================================
+
+Webhook Node
+    ↓
+    Receives: {
+      "worker_name": "KISHOR.S",
+      "worker_email": "kishor@example.com",
+      "trade": "mechanic",
+      ...
+    }
+    ↓
+Gmail Node (INCORRECTLY CONFIGURED)
+    ├─ To: hardcoded@example.com
+    ├─ Subject: "New Job Application" (static)
+    └─ Body: "Worker Name: KISHOR.S" (hardcoded)
+    ↓
+Email Sent (WRONG - always same content)
+    "A worker has applied for your job on SkillLink.
+     Worker Name: KISHOR.S
+     Trade: mechanic
+     ..."
+
+================================================================================
+CORRECT WORKFLOW (FIXED)
+================================================================================
+
+Webhook Node
+    ↓
+    Receives: {
+      "worker_name": "KISHOR.S",
+      "worker_email": "kishor@example.com",
+      "trade": "mechanic",
+      "company_email": "hiring@abcconstruction.com",
+      ...
+    }
+    ↓
+Gmail Node (CORRECTLY CONFIGURED)
+    ├─ To: {{ $json.company_email }}
+    ├─ Subject: "New Job Application - {{ $json.job_title }} Position"
+    └─ Body: Uses {{ $json.worker_name }}, {{ $json.trade }}, etc.
+    ↓
+Email Sent (CORRECT - dynamic content)
+    "A worker has applied for your job on SkillLink.
+     Worker Name: KISHOR.S
+     Trade: mechanic
+     Email: kishor@example.com
+     ..."
+
+================================================================================
+N8N GMAIL NODE CONFIGURATION - STEP BY STEP
+================================================================================
+
+STEP 1: OPEN GMAIL NODE
+┌─────────────────────────────────────────────────────────────┐
+│ n8n Workflow                                                │
+│                                                              │
+│ [Webhook] ──→ [Gmail] ──→ [Response]                        │
+│                                                              │
+│ Click on Gmail node to configure                            │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 2: CONFIGURE "TO" FIELD
+┌─────────────────────────────────────────────────────────────┐
+│ Gmail Node Configuration                                    │
+│                                                              │
+│ To: [________________________]                              │
+│     {{ $json.company_email }}                               │
+│                                                              │
+│ This sends email to the company that posted the job         │
+│ Example: hiring@abcconstruction.com                         │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 3: CONFIGURE "SUBJECT" FIELD
+┌─────────────────────────────────────────────────────────────┐
+│ Gmail Node Configuration                                    │
+│                                                              │
+│ Subject: [________________________]                         │
+│          New Job Application - {{ $json.job_title }}        │
+│          Position                                           │
+│                                                              │
+│ Example output: "New Job Application - Plumber Position"    │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 4: CONFIGURE "BODY" FIELD (HTML)
+┌─────────────────────────────────────────────────────────────┐
+│ Gmail Node Configuration                                    │
+│                                                              │
+│ Body (HTML): [________________________]                     │
+│                                                              │
+│ <html>                                                      │
+│   <body>                                                    │
+│     <h1>New Job Application</h1>                            │
+│                                                              │
+│     <p>Hello {{ $json.company_name }},</p>                  │
+│                                                              │
+│     <p>A worker has applied for your job.</p>               │
+│                                                              │
+│     <h3>Worker Details</h3>                                 │
+│     <p>Name: {{ $json.worker_name }}</p>                    │
+│     <p>Email: {{ $json.worker_email }}</p>                  │
+│     <p>Trade: {{ $json.trade }}</p>                         │
+│     <p>Experience: {{ $json.experience }}</p>               │
+│     <p>Location: {{ $json.location }}</p>                   │
+│                                                              │
+│     <h3>Job Details</h3>                                    │
+│     <p>Position: {{ $json.job_title }}</p>                  │
+│     <p>Company: {{ $json.company_name }}</p>                │
+│     <p>Location: {{ $json.company_location }}</p>           │
+│                                                              │
+│     <p>Please log in to SkillLink to review.</p>            │
+│   </body>                                                   │
+│ </html>                                                     │
+└─────────────────────────────────────────────────────────────┘
+
+================================================================================
+VARIABLE REFERENCE - WHAT TO USE
+================================================================================
+
+WORKER VARIABLES:
+┌─────────────────────────────────────────────────────────────┐
+│ {{ $json.worker_name }}      → "KISHOR.S"                   │
+│ {{ $json.worker_email }}     → "kishor@example.com"         │
+│ {{ $json.trade }}            → "mechanic"                   │
+│ {{ $json.experience }}       → "5-10 years"                 │
+│ {{ $json.location }}         → "Pondicherry, villianur"     │
+└─────────────────────────────────────────────────────────────┘
+
+JOB VARIABLES:
+┌─────────────────────────────────────────────────────────────┐
+│ {{ $json.job_title }}        → "Plumber"                    │
+└─────────────────────────────────────────────────────────────┘
+
+COMPANY VARIABLES:
+┌─────────────────────────────────────────────────────────────┐
+│ {{ $json.company_name }}     → "ABC Construction"           │
+│ {{ $json.company_email }}    → "hiring@abcconstruction.com" │
+│ {{ $json.company_location }} → "Mumbai"                     │
+└─────────────────────────────────────────────────────────────┘
+
+================================================================================
+BEFORE & AFTER COMPARISON
+================================================================================
+
+BEFORE (WRONG - Static Email):
+┌─────────────────────────────────────────────────────────────┐
+│ To: hardcoded@example.com                                   │
+│ Subject: New Job Application                                │
+│ Body:                                                       │
+│   Hello,                                                    │
+│   A worker has applied for your job on SkillLink.           │
+│   Worker Name: KISHOR.S                                     │
+│   Trade: mechanic                                           │
+│   Experience: 5-10 years                                    │
+│   Location: Pondicherry, villianur                          │
+│   Job Title: Plumber                                        │
+│   Please log in to SkillLink to review the worker profile.  │
+│   Regards, SkillLink Team                                   │
+└─────────────────────────────────────────────────────────────┘
+
+AFTER (CORRECT - Dynamic Email):
+┌─────────────────────────────────────────────────────────────┐
+│ To: {{ $json.company_email }}                               │
+│ Subject: New Job Application - {{ $json.job_title }}        │
+│          Position                                           │
+│ Body:                                                       │
+│   Hello {{ $json.company_name }},                           │
+│   A worker has applied for your job on SkillLink.           │
+│   Worker Name: {{ $json.worker_name }}                      │
+│   Email: {{ $json.worker_email }}                           │
+│   Trade: {{ $json.trade }}                                  │
+│   Experience: {{ $json.experience }}                        │
+│   Location: {{ $json.location }}                            │
+│   Job Title: {{ $json.job_title }}                          │
+│   Company: {{ $json.company_name }}                         │
+│   Location: {{ $json.company_location }}                    │
+│   Please log in to SkillLink to review the worker profile.  │
+│   Regards, SkillLink Team                                   │
+└─────────────────────────────────────────────────────────────┘
+
+RESULT:
+Each company receives email with THEIR OWN worker details!
+
+================================================================================
+TESTING IN N8N
+================================================================================
+
+1. OPEN WEBHOOK NODE
+   ┌─────────────────────────────────────────────────────────┐
+   │ Webhook Node                                            │
+   │ ├─ Click "Test"                                         │
+   │ └─ You should see the payload with all variables        │
+   └─────────────────────────────────────────────────────────┘
+
+2. VERIFY PAYLOAD
+   ┌─────────────────────────────────────────────────────────┐
+   │ Webhook Payload (Test Output):                          │
+   │ {                                                       │
+   │   "worker_name": "KISHOR.S",                            │
+   │   "worker_email": "kishor@example.com",                 │
+   │   "trade": "mechanic",                                  │
+   │   "experience": "5-10 years",                           │
+   │   "location": "Pondicherry, villianur",                 │
+   │   "job_title": "Plumber",                               │
+   │   "company_name": "ABC Construction",                   │
+   │   "company_email": "hiring@abcconstruction.com",        │
+   │   "company_location": "Mumbai"                          │
+   │ }                                                       │
+   │                                                         │
+   │ ✅ If you see this, webhook is working correctly        │
+   │ ❌ If you see hardcoded values, backend needs fixing    │
+   └─────────────────────────────────────────────────────────┘
+
+3. EXECUTE WORKFLOW
+   ┌─────────────────────────────────────────────────────────┐
+   │ Click "Execute" button                                  │
+   │ Watch the workflow run                                  │
+   │ Check Gmail inbox for email                             │
+   │ Verify all variables are replaced with actual values    │
+   └─────────────────────────────────────────────────────────┘
+
+4. CHECK EMAIL
+   ┌─────────────────────────────────────────────────────────┐
+   │ Gmail Inbox                                             │
+   │                                                         │
+   │ From: SkillLink <noreply@skilllink.com>                 │
+   │ To: hiring@abcconstruction.com                          │
+   │ Subject: New Job Application - Plumber Position         │
+   │                                                         │
+   │ Body:                                                   │
+   │ Hello ABC Construction,                                 │
+   │                                                         │
+   │ A worker has applied for your job on SkillLink.         │
+   │                                                         │
+   │ Worker Details                                          │
+   │ Name: KISHOR.S                                          │
+   │ Email: kishor@example.com                               │
+   │ Trade: mechanic                                         │
+   │ Experience: 5-10 years                                  │
+   │ Location: Pondicherry, villianur                        │
+   │                                                         │
+   │ Job Details                                             │
+   │ Position: Plumber                                       │
+   │ Company: ABC Construction                               │
+   │ Location: Mumbai                                        │
+   │                                                         │
+   │ ✅ All variables replaced correctly!                    │
+   └─────────────────────────────────────────────────────────┘
+
+================================================================================
+COMMON MISTAKES & FIXES
+================================================================================
+
+MISTAKE 1: Using single curly braces
+┌─────────────────────────────────────────────────────────────┐
+│ ❌ WRONG: $json.worker_name                                 │
+│ ✅ CORRECT: {{ $json.worker_name }}                         │
+│                                                              │
+│ Result: Single braces won't be replaced                     │
+│ Fix: Use double curly braces {{ }}                          │
+└─────────────────────────────────────────────────────────────┘
+
+MISTAKE 2: Incorrect field names
+┌─────────────────────────────────────────────────────────────┐
+│ ❌ WRONG: {{ $json.workerName }}                             │
+│ ❌ WRONG: {{ $json.worker }}                                 │
+│ ✅ CORRECT: {{ $json.worker_name }}                         │
+│                                                              │
+│ Result: Field not found, shows blank                        │
+│ Fix: Use exact field names from payload                     │
+└─────────────────────────────────────────────────────────────┘
+
+MISTAKE 3: Hardcoding values
+┌─────────────────────────────────────────────────────────────┐
+│ ❌ WRONG: "Worker Name: KISHOR.S"                            │
+│ ✅ CORRECT: "Worker Name: {{ $json.worker_name }}"          │
+│                                                              │
+│ Result: Always shows KISHOR.S, not dynamic                  │
+│ Fix: Use variables instead of hardcoded values              │
+└─────────────────────────────────────────────────────────────┘
+
+MISTAKE 4: Forgetting "To" field
+┌─────────────────────────────────────────────────────────────┐
+│ ❌ WRONG: To field is empty or hardcoded                     │
+│ ✅ CORRECT: To: {{ $json.company_email }}                   │
+│                                                              │
+│ Result: Email goes to default address                       │
+│ Fix: Set To field to company_email variable                 │
+└─────────────────────────────────────────────────────────────┘
+
+================================================================================
+QUICK CHECKLIST
+================================================================================
+
+Before testing, verify:
+
+☑ Gmail node "To" field: {{ $json.company_email }}
+☑ Gmail node "Subject" field: Uses {{ $json.job_title }}
+☑ Gmail node "Body" field: Uses {{ $json.worker_name }}, etc.
+☑ All variables use {{ }} (double curly braces)
+☑ All field names match payload exactly
+☑ No typos in variable names
+☑ No hardcoded values in template
+☑ Webhook is receiving correct payload
+☑ Gmail node is connected to Webhook node
+☑ Workflow is active/enabled
+
+================================================================================
+RESULT
+================================================================================
+
+After configuration:
+
+✅ Each company receives email with THEIR OWN worker details
+✅ Email "To" field is DYNAMIC (company_email from database)
+✅ Email "Subject" includes job title
+✅ Email "Body" includes all worker information
+✅ Email "Body" includes all company information
+✅ No hardcoded values
+✅ Professional, personalized emails
+
+================================================================================

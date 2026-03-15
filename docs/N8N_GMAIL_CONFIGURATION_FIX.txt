@@ -1,0 +1,396 @@
+================================================================================
+N8N GMAIL NODE CONFIGURATION FIX - DYNAMIC EMAIL TEMPLATE
+================================================================================
+
+PROBLEM:
+--------
+Email being sent is static/hardcoded instead of using dynamic data from webhook:
+
+Current (WRONG):
+"A worker has applied for your job on SkillLink. Worker Name: KISHOR.S Trade: mechanic..."
+
+Expected (CORRECT):
+"A worker has applied for your job on SkillLink. Worker Name: [actual worker name] Trade: [actual trade]..."
+
+ROOT CAUSE:
+-----------
+The n8n Gmail node is NOT using the webhook payload variables.
+The email template has hardcoded values instead of dynamic variables.
+
+SOLUTION:
+---------
+Configure the n8n Gmail node to use webhook payload variables with proper syntax.
+
+================================================================================
+STEP 1: VERIFY WEBHOOK IS RECEIVING DATA
+================================================================================
+
+1. Go to n8n workflow
+2. Click on the Webhook node
+3. Check the "Test" tab
+4. Look for the payload structure:
+
+Expected payload:
+{
+  "worker_name": "KISHOR.S",
+  "worker_email": "kishor@example.com",
+  "trade": "mechanic",
+  "experience": "5-10 years",
+  "location": "Pondicherry, villianur",
+  "job_title": "Plumber",
+  "company_name": "ABC Construction",
+  "company_email": "hiring@abcconstruction.com",
+  "company_location": "Mumbai"
+}
+
+If you see this data, the webhook is working correctly.
+If you see hardcoded values, the backend is not sending correct data.
+
+================================================================================
+STEP 2: CONFIGURE GMAIL NODE - CORRECT SYNTAX
+================================================================================
+
+In n8n Gmail node, use this syntax to reference webhook variables:
+
+{{ $json.field_name }}
+
+IMPORTANT: Use double curly braces {{ }} not single {{ }}
+
+EXAMPLE:
+--------
+Instead of: "Worker Name: KISHOR.S"
+Use: "Worker Name: {{ $json.worker_name }}"
+
+Instead of: "Trade: mechanic"
+Use: "Trade: {{ $json.trade }}"
+
+================================================================================
+STEP 3: COMPLETE EMAIL TEMPLATE CONFIGURATION
+================================================================================
+
+GMAIL NODE SETTINGS:
+
+1. TO FIELD:
+   {{ $json.company_email }}
+   
+   This sends email to the company that posted the job
+
+2. SUBJECT FIELD:
+   New Job Application - {{ $json.job_title }} Position
+   
+   Example output: "New Job Application - Plumber Position"
+
+3. BODY FIELD (HTML):
+   Use the template below:
+
+---START OF EMAIL TEMPLATE---
+
+<html>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+      
+      <!-- Header -->
+      <div style="background-color: #1e40af; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px;">
+        <h1 style="margin: 0; font-size: 24px;">New Job Application</h1>
+        <p style="margin: 5px 0 0 0; font-size: 14px;">SkillLink Platform</p>
+      </div>
+
+      <!-- Main Content -->
+      <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        
+        <p style="margin-top: 0;">Hello {{ $json.company_name }},</p>
+        
+        <p>A worker has applied for your job on SkillLink. Here are the details:</p>
+
+        <!-- Worker Details -->
+        <div style="background-color: white; padding: 15px; border-left: 4px solid #1e40af; margin: 15px 0;">
+          <h3 style="margin-top: 0; color: #1e40af;">Worker Details</h3>
+          
+          <p style="margin: 8px 0;">
+            <strong>Name:</strong> {{ $json.worker_name }}
+          </p>
+          
+          <p style="margin: 8px 0;">
+            <strong>Email:</strong> {{ $json.worker_email }}
+          </p>
+          
+          <p style="margin: 8px 0;">
+            <strong>Trade/Skill:</strong> {{ $json.trade }}
+          </p>
+          
+          <p style="margin: 8px 0;">
+            <strong>Experience:</strong> {{ $json.experience }}
+          </p>
+          
+          <p style="margin: 8px 0;">
+            <strong>Location:</strong> {{ $json.location }}
+          </p>
+        </div>
+
+        <!-- Job Details -->
+        <div style="background-color: white; padding: 15px; border-left: 4px solid #3b82f6; margin: 15px 0;">
+          <h3 style="margin-top: 0; color: #3b82f6;">Job Details</h3>
+          
+          <p style="margin: 8px 0;">
+            <strong>Position:</strong> {{ $json.job_title }}
+          </p>
+          
+          <p style="margin: 8px 0;">
+            <strong>Your Company:</strong> {{ $json.company_name }}
+          </p>
+          
+          <p style="margin: 8px 0;">
+            <strong>Location:</strong> {{ $json.company_location }}
+          </p>
+        </div>
+
+        <!-- Call to Action -->
+        <div style="background-color: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center;">
+          <p style="margin: 0;">
+            <a href="http://localhost:3000/company/my-workers" style="background-color: #1e40af; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
+              Review Application
+            </a>
+          </p>
+        </div>
+
+        <p>Please log in to SkillLink to review the worker profile and take action on this application.</p>
+
+      </div>
+
+      <!-- Footer -->
+      <div style="text-align: center; color: #666; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+        <p style="margin: 5px 0;">
+          © 2026 SkillLink. All rights reserved.
+        </p>
+        <p style="margin: 5px 0;">
+          <a href="http://localhost:3000" style="color: #1e40af; text-decoration: none;">Visit SkillLink</a>
+        </p>
+      </div>
+
+    </div>
+  </body>
+</html>
+
+---END OF EMAIL TEMPLATE---
+
+================================================================================
+STEP 4: VARIABLE REFERENCE GUIDE
+================================================================================
+
+Use these variables in your email template:
+
+{{ $json.worker_name }}           → Worker's full name
+{{ $json.worker_email }}          → Worker's email address
+{{ $json.trade }}                 → Worker's trade/skill
+{{ $json.experience }}            → Worker's years of experience
+{{ $json.location }}              → Worker's location
+{{ $json.job_title }}             → Job title/position
+{{ $json.company_name }}          → Company name
+{{ $json.company_email }}         → Company email (recipient)
+{{ $json.company_location }}      → Company location
+
+EXAMPLE USAGE IN EMAIL:
+"{{ $json.worker_name }} has applied for the {{ $json.job_title }} position at {{ $json.company_name }}"
+
+Output: "KISHOR.S has applied for the Plumber position at ABC Construction"
+
+================================================================================
+STEP 5: N8N WORKFLOW CONFIGURATION
+================================================================================
+
+Your n8n workflow should look like this:
+
+1. WEBHOOK NODE
+   ├─ Trigger: POST request
+   ├─ URL: https://kishorsanthoshkumar.app.n8n.cloud/webhook/worker-application
+   └─ Receives: Webhook payload with all variables
+
+2. GMAIL NODE
+   ├─ To: {{ $json.company_email }}
+   ├─ Subject: New Job Application - {{ $json.job_title }} Position
+   ├─ Body: [Use HTML template above]
+   └─ Send: Email with dynamic variables
+
+3. RESPONSE NODE (Optional)
+   └─ Return: Success message
+
+================================================================================
+STEP 6: TESTING THE CONFIGURATION
+================================================================================
+
+1. In n8n, click "Test" on the Webhook node
+2. You should see the payload with all variables
+3. Click "Execute" to test the workflow
+4. Check Gmail inbox for the email
+5. Verify that all variables are replaced with actual values
+
+EXPECTED EMAIL:
+"Hello ABC Construction,
+
+A worker has applied for your job on SkillLink. Here are the details:
+
+Worker Details
+Name: KISHOR.S
+Email: kishor@example.com
+Trade/Skill: mechanic
+Experience: 5-10 years
+Location: Pondicherry, villianur
+
+Job Details
+Position: Plumber
+Your Company: ABC Construction
+Location: Mumbai
+
+[Review Application Button]"
+
+================================================================================
+STEP 7: COMMON MISTAKES TO AVOID
+================================================================================
+
+❌ WRONG: Using single curly braces
+   $json.worker_name
+   
+✅ CORRECT: Using double curly braces
+   {{ $json.worker_name }}
+
+❌ WRONG: Using incorrect field names
+   {{ $json.workerName }}
+   {{ $json.worker }}
+   
+✅ CORRECT: Using exact field names from payload
+   {{ $json.worker_name }}
+
+❌ WRONG: Hardcoding values in template
+   "Worker Name: KISHOR.S"
+   
+✅ CORRECT: Using variables
+   "Worker Name: {{ $json.worker_name }}"
+
+❌ WRONG: Forgetting to set the "To" field
+   (Email goes to default address)
+   
+✅ CORRECT: Setting "To" field to company email
+   {{ $json.company_email }}
+
+================================================================================
+STEP 8: DEBUGGING
+================================================================================
+
+If email is still not using dynamic variables:
+
+1. CHECK WEBHOOK PAYLOAD:
+   - Go to Webhook node
+   - Click "Test"
+   - Verify payload has all variables
+   - If missing, backend is not sending correct data
+
+2. CHECK GMAIL NODE CONFIGURATION:
+   - Verify "To" field uses {{ $json.company_email }}
+   - Verify "Subject" uses {{ $json.job_title }}
+   - Verify "Body" uses {{ $json.worker_name }}, etc.
+   - Check for typos in variable names
+
+3. CHECK VARIABLE SYNTAX:
+   - Must use {{ }} (double curly braces)
+   - Must use exact field names from payload
+   - No spaces inside braces: {{ $json.worker_name }} ✓
+   - Not: {{ $ json . worker_name }} ✗
+
+4. TEST WORKFLOW:
+   - Click "Execute" on Webhook node
+   - Check if variables are replaced
+   - Look at email in Gmail inbox
+   - Verify all fields are populated
+
+5. CHECK LOGS:
+   - Go to n8n Execution History
+   - Look for errors in Gmail node
+   - Check if variables were resolved
+
+================================================================================
+STEP 9: PRODUCTION DEPLOYMENT
+================================================================================
+
+Before going live:
+
+1. Test with multiple companies
+   - Company 1 applies → Email to company1@example.com
+   - Company 2 applies → Email to company2@example.com
+   - Verify each gets correct email
+
+2. Test with different worker data
+   - Different names, trades, locations
+   - Verify all variables are populated
+
+3. Monitor email delivery
+   - Check Gmail sent folder
+   - Verify emails are being sent
+   - Check for bounces
+
+4. Monitor n8n logs
+   - Check for errors
+   - Monitor execution history
+   - Track success rate
+
+================================================================================
+STEP 10: FINAL VERIFICATION
+================================================================================
+
+After configuration, verify:
+
+☑ Email "To" field uses {{ $json.company_email }}
+☑ Email "Subject" uses {{ $json.job_title }}
+☑ Email "Body" uses all worker variables
+☑ Email "Body" uses all company variables
+☑ All variables use {{ }} syntax
+☑ All field names match payload exactly
+☑ No hardcoded values in template
+☑ Test workflow executes successfully
+☑ Email received with dynamic data
+☑ All variables replaced correctly
+
+================================================================================
+QUICK REFERENCE - COPY/PASTE READY
+================================================================================
+
+TO FIELD:
+{{ $json.company_email }}
+
+SUBJECT FIELD:
+New Job Application - {{ $json.job_title }} Position
+
+BODY FIELD (Simple version):
+Hello {{ $json.company_name }},
+
+A worker has applied for your job on SkillLink.
+
+Worker Details:
+Name: {{ $json.worker_name }}
+Email: {{ $json.worker_email }}
+Trade: {{ $json.trade }}
+Experience: {{ $json.experience }}
+Location: {{ $json.location }}
+
+Job Details:
+Position: {{ $json.job_title }}
+Your Company: {{ $json.company_name }}
+Location: {{ $json.company_location }}
+
+Please log in to SkillLink to review the application.
+
+Regards,
+SkillLink Team
+
+================================================================================
+SUPPORT
+================================================================================
+
+If you need help:
+
+1. Check WEBHOOK_PAYLOAD_REFERENCE.txt for payload structure
+2. Check N8N_SETUP_GUIDE.txt for n8n setup
+3. Verify backend is sending correct data (check logs)
+4. Verify n8n is receiving correct data (check webhook test)
+5. Verify Gmail node is configured correctly (check variables)
+
+================================================================================

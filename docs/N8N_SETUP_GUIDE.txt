@@ -1,0 +1,203 @@
+================================================================================
+N8N WORKFLOW SETUP GUIDE
+================================================================================
+
+CURRENT STATUS:
+✅ Backend integration complete
+✅ Webhook logging working
+✅ Applications being saved
+❌ n8n workflow NOT activated (404 error)
+
+ERROR MESSAGE:
+"The requested webhook 'POST worker-application' is not registered"
+"The workflow must be active for a production URL to run successfully"
+
+================================================================================
+STEP-BY-STEP SETUP INSTRUCTIONS
+================================================================================
+
+STEP 1: Login to n8n
+--------------------
+1. Go to: https://kishorsanthoshkumar.app.n8n.cloud/
+2. Login with your credentials
+
+STEP 2: Create New Workflow
+----------------------------
+1. Click "New Workflow" button
+2. Name it: "Worker Application Email Notification"
+
+STEP 3: Add Webhook Node
+-------------------------
+1. Click the "+" button to add a node
+2. Search for "Webhook"
+3. Select "Webhook" node
+4. Configure:
+   - HTTP Method: POST
+   - Path: worker-application
+   - Response Mode: Respond Immediately
+   - Response Code: 200
+
+STEP 4: Add Gmail Node
+-----------------------
+1. Click "+" after the Webhook node
+2. Search for "Gmail"
+3. Select "Gmail" node
+4. Configure:
+   - Operation: Send Email
+   - To: {{ $json.company_email }}
+   - Subject: New Worker Application - SkillLink
+   - Email Type: Text or HTML
+
+STEP 5: Configure Email Template
+---------------------------------
+Use this email body (HTML format):
+
+<h2>New Worker Application</h2>
+<p>A new worker has applied for your job posting on SkillLink.</p>
+
+<h3>Worker Details:</h3>
+<ul>
+  <li><strong>Name:</strong> {{ $json.worker_name }}</li>
+  <li><strong>Trade:</strong> {{ $json.trade }}</li>
+  <li><strong>Experience:</strong> {{ $json.experience }}</li>
+  <li><strong>Location:</strong> {{ $json.location }}</li>
+</ul>
+
+<h3>Job Details:</h3>
+<ul>
+  <li><strong>Position:</strong> {{ $json.job_title }}</li>
+</ul>
+
+<p>Please log in to your SkillLink dashboard to review the application and contact the worker.</p>
+
+<p>Best regards,<br>SkillLink Team</p>
+
+STEP 6: Connect Gmail Account
+------------------------------
+1. In the Gmail node, click "Create New Credential"
+2. Follow OAuth2 flow to connect your Gmail account
+3. Grant necessary permissions
+
+STEP 7: ACTIVATE THE WORKFLOW
+------------------------------
+⚠️ CRITICAL STEP - Don't forget this!
+
+1. Click the toggle switch at the top right
+2. Make sure it says "Active" (green)
+3. The workflow MUST be active for the webhook to work
+
+STEP 8: Test the Webhook
+-------------------------
+Option A: Test from n8n
+1. Click "Execute Workflow" button
+2. Send test data
+
+Option B: Test from SkillLink
+1. Have a worker apply to a job
+2. Check backend logs
+3. Run: python view_application_logs.py
+4. Check company email inbox
+
+================================================================================
+WEBHOOK PAYLOAD STRUCTURE
+================================================================================
+
+The backend sends this JSON to n8n:
+
+{
+  "worker_name": "Aravind Rai",
+  "trade": "Plumber",
+  "experience": "8 years",
+  "location": "Coimbatore, Tamil Nadu",
+  "job_title": "Senior Plumber",
+  "company_email": "company@example.com"
+}
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Issue 1: Still getting 404 error
+Solution: Make sure workflow is ACTIVE (toggle ON)
+
+Issue 2: Email not sending
+Solution: Check Gmail credentials are connected
+
+Issue 3: Wrong email address
+Solution: Verify company users have valid email addresses in database
+
+Issue 4: Webhook timeout
+Solution: Check n8n workflow execution time (should be < 10 seconds)
+
+================================================================================
+VERIFICATION STEPS
+================================================================================
+
+After activating the workflow:
+
+1. Have a worker apply to a job
+2. Check backend console - should see:
+   📝 Worker X applying to job Y
+   ✅ Worker application saved to database
+   📬 Company dashboard receives application
+   🚀 n8n webhook triggered
+   ✅ n8n webhook SUCCESS - Status: 200
+   📧 Email workflow started - Status: Webhook triggered successfully
+
+3. Run: python view_application_logs.py
+   Should show:
+   ✅ Response Code: 200
+   📧 Email Status: Webhook triggered successfully
+
+4. Check company email inbox
+   Should receive email with worker details
+
+================================================================================
+ALTERNATIVE: Test Webhook Manually
+================================================================================
+
+You can test the webhook URL directly using curl:
+
+curl -X POST https://kishorsanthoshkumar.app.n8n.cloud/webhook/worker-application \
+  -H "Content-Type: application/json" \
+  -d '{
+    "worker_name": "Test Worker",
+    "trade": "Carpenter",
+    "experience": "5 years",
+    "location": "Chennai",
+    "job_title": "Carpenter Position",
+    "company_email": "your-email@gmail.com"
+  }'
+
+Expected response after activation:
+- Status: 200 OK
+- Body: Success message
+
+Before activation:
+- Status: 404
+- Body: "The requested webhook is not registered"
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. ✅ Backend is ready (already done)
+2. ⏳ Activate n8n workflow (do this now)
+3. ✅ Test by applying to a job
+4. ✅ Verify email received
+5. ✅ Check logs with: python view_application_logs.py
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+✓ Applications are ALWAYS saved even if email fails
+✓ In-app notifications work regardless of email status
+✓ Webhook failures are logged for debugging
+✓ Email is a bonus feature, not critical for functionality
+✓ You can monitor all webhook attempts with view_application_logs.py
+
+================================================================================
+🎯 ACTION REQUIRED: Activate n8n workflow at
+https://kishorsanthoshkumar.app.n8n.cloud/
+================================================================================

@@ -1,0 +1,283 @@
+================================================================================
+DETAILED CODE CHANGES - DYNAMIC COMPANY EMAIL IMPLEMENTATION
+================================================================================
+
+FILE: app/routers/job.py
+
+================================================================================
+CHANGE 1: UPDATE WEBHOOK FUNCTION SIGNATURE AND PAYLOAD
+================================================================================
+
+Location: Lines 35-82
+Function: trigger_n8n_webhook()
+
+BEFORE:
+-------
+async def trigger_n8n_webhook(worker_data: dict, job_data: dict, company_email: str):
+    """
+    Trigger n8n webhook to send email notification to company when worker applies.
+    
+    Returns tuple: (status_message, response_code, response_body, error_message)
+    
+    Args:
+        worker_data: Worker information (name, trade, experience, location)
+        job_data: Job information (title, required_trade)
+        company_email: Company email address
+    """
+    try:
+        payload = {
+            "worker_name": worker_data.get("full_name", "Unknown"),
+            "trade": worker_data.get("primary_trade", "Not specified"),
+            "experience": worker_data.get("years_of_experience", "Not specified"),
+            "location": worker_data.get("location", "Not specified"),
+            "job_title": job_data.get("required_trade", "Position"),
+            "company_email": company_email
+        }
+        
+        logger.info(f"🔔 Triggering n8n webhook for {company_email}")
+        logger.debug(f"Webhook payload: {payload}")
+        
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(N8N_WEBHOOK_URL_APPLICATION, json=payload)
+            
+            response_body = response.text[:500]
+            
+            if response.status_code == 200:
+                logger.info(f"✅ n8n webhook SUCCESS - Status: {response.status_code}")
+                return ("Webhook triggered successfully", response.status_code, response_body, None)
+            else:
+                logger.warning(f"⚠️ n8n webhook returned status {response.status_code}")
+                return (f"Webhook returned status {response.status_code}", response.status_code, response_body, None)
+                
+    except httpx.TimeoutException as e:
+        error_msg = f"Webhook timeout: {str(e)}"
+        logger.error(f"❌ {error_msg}")
+        return ("Webhook timeout", None, None, error_msg)
+    except Exception as e:
+        error_msg = f"Webhook error: {str(e)}"
+        logger.error(f"❌ {error_msg}")
+        return ("Webhook failed", None, None, error_msg)
+
+
+AFTER:
+------
+async def trigger_n8n_webhook(worker_data: dict, job_data: dict, company_data: dict):
+    """
+    Trigger n8n webhook to send email notification to company when worker applies.
+    
+    Returns tuple: (status_message, response_code, response_body, error_message)
+    
+    Args:
+        worker_data: Worker information (name, email, trade, experience, location)
+        job_data: Job information (title, required_trade)
+        company_data: Company information (name, email, location)
+    """
+    try:
+        payload = {
+            "worker_name": worker_data.get("full_name", "Unknown"),
+            "worker_email": worker_data.get("email", "no-email@example.com"),
+            "trade": worker_data.get("primary_trade", "Not specified"),
+            "experience": worker_data.get("years_of_experience", "Not specified"),
+            "location": worker_data.get("location", "Not specified"),
+            "job_title": job_data.get("required_trade", "Position"),
+            "company_name": company_data.get("company_name", "Company"),
+            "company_email": company_data.get("email", "no-email@example.com"),
+            "company_location": company_data.get("location", "Not specified")
+        }
+        
+        logger.info(f"🔔 Triggering n8n webhook for company: {payload['company_email']}")
+        logger.debug(f"Webhook payload: {payload}")
+        
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(N8N_WEBHOOK_URL_APPLICATION, json=payload)
+            
+            response_body = response.text[:500]
+            
+            if response.status_code == 200:
+                logger.info(f"✅ n8n webhook SUCCESS - Status: {response.status_code}")
+                return ("Webhook triggered successfully", response.status_code, response_body, None)
+            else:
+                logger.warning(f"⚠️ n8n webhook returned status {response.status_code}")
+                return (f"Webhook returned status {response.status_code}", response.status_code, response_body, None)
+                
+    except httpx.TimeoutException as e:
+        error_msg = f"Webhook timeout: {str(e)}"
+        logger.error(f"❌ {error_msg}")
+        return ("Webhook timeout", None, None, error_msg)
+    except Exception as e:
+        error_msg = f"Webhook error: {str(e)}"
+        logger.error(f"❌ {error_msg}")
+        return ("Webhook failed", None, None, error_msg)
+
+
+KEY CHANGES:
+- Function parameter: company_email (str) → company_data (dict)
+- Payload now includes 9 fields instead of 6
+- Added: worker_email, company_name, company_location
+- company_email now comes from company_data dict (DYNAMIC)
+- Improved logging to show company email
+
+================================================================================
+CHANGE 2: UPDATE APPLY_TO_JOB FUNCTION - FETCH COMPANY DATA
+================================================================================
+
+Location: Lines 520-630
+Function: apply_to_job()
+
+BEFORE (around line 580):
+---------
+        db.commit()
+        
+        # Get company email for n8n webhook
+        company_user = db.query(User).filter(User.id == job.company_id).first()
+        company_email = company_user.email if company_user and company_user.email else "no-email@example.com"
+        
+        # Prepare webhook data
+        worker_data = {
+            "full_name": worker_resume.full_name,
+            "primary_trade": worker_resume.primary_trade,
+            "years_of_experience": worker_resume.years_of_experience,
+            "location": f"{worker_resume.village_or_city}, {worker_resume.district}" if worker_resume.village_or_city else worker_resume.location
+        }
+        
+        job_data = {
+            "required_trade": job.required_trade,
+            "location": job.location
+        }
+        
+        logger.info(f"🚀 n8n webhook triggered")
+        
+        # Trigger webhook and get response
+        status_msg, response_code, response_body, error_msg = await trigger_n8n_webhook(
+            worker_data, job_data, company_email
+        )
+
+
+AFTER (around line 580):
+--------
+        db.commit()
+        
+        # Get company user and company profile for email and details
+        company_user = db.query(User).filter(User.id == job.company_id).first()
+        company = db.query(Company).filter(Company.user_id == job.company_id).first()
+        
+        company_email = company_user.email if company_user and company_user.email else "no-email@example.com"
+        
+        # Prepare webhook data with all required fields
+        worker_data = {
+            "full_name": worker_resume.full_name,
+            "email": current_user.email if current_user.email else "no-email@example.com",
+            "primary_trade": worker_resume.primary_trade,
+            "years_of_experience": worker_resume.years_of_experience,
+            "location": f"{worker_resume.village_or_city}, {worker_resume.district}" if worker_resume.village_or_city else worker_resume.location
+        }
+        
+        job_data = {
+            "required_trade": job.required_trade,
+            "location": job.location
+        }
+        
+        company_data = {
+            "company_name": company.company_name if company else company_user.username if company_user else "Company",
+            "email": company_email,
+            "location": company.location if company else job.location
+        }
+        
+        logger.info(f"🚀 n8n webhook triggered for company: {company_email}")
+        
+        # Trigger webhook and get response
+        status_msg, response_code, response_body, error_msg = await trigger_n8n_webhook(
+            worker_data, job_data, company_data
+        )
+
+
+KEY CHANGES:
+- Added: company = db.query(Company).filter(Company.user_id == job.company_id).first()
+- Added: worker_email to worker_data dict
+- Added: company_data dict with company_name, email, location
+- Updated webhook call to pass company_data instead of company_email
+- Improved logging to show company email
+
+================================================================================
+SUMMARY OF CHANGES
+================================================================================
+
+1. Function Signature Change:
+   OLD: trigger_n8n_webhook(worker_data, job_data, company_email)
+   NEW: trigger_n8n_webhook(worker_data, job_data, company_data)
+
+2. Payload Fields Added:
+   - worker_email (from User.email)
+   - company_name (from Company.company_name)
+   - company_location (from Company.location)
+
+3. Database Queries Added:
+   - Query Company table using company_id
+   - Fetch company name and location
+
+4. Data Structure Changes:
+   - company_email parameter → company_data dict
+   - company_data includes: company_name, email, location
+
+5. Logging Improvements:
+   - Shows which company email is being used
+   - More detailed webhook payload logging
+
+================================================================================
+BACKWARD COMPATIBILITY
+================================================================================
+
+These changes are BACKWARD COMPATIBLE because:
+
+1. The webhook function still returns the same tuple format
+2. The apply_to_job function still returns the same response
+3. The webhook URL remains the same
+4. The database schema is unchanged
+5. No breaking changes to API endpoints
+
+The only change is the webhook PAYLOAD, which now includes more fields.
+N8N can ignore extra fields it doesn't use.
+
+================================================================================
+TESTING THE CHANGES
+================================================================================
+
+1. Syntax Check:
+   python -m py_compile app/routers/job.py
+   (Should complete without errors)
+
+2. Run Backend:
+   python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+3. Run Test Script:
+   python test_dynamic_company_email.py
+
+4. Check Logs:
+   Look for: "🔔 Triggering n8n webhook for company: {email}"
+
+5. Verify Webhook:
+   Check n8n webhook logs for correct company email
+
+================================================================================
+ROLLBACK INSTRUCTIONS
+================================================================================
+
+If you need to rollback these changes:
+
+1. Revert the function signature:
+   Change: trigger_n8n_webhook(worker_data, job_data, company_data)
+   Back to: trigger_n8n_webhook(worker_data, job_data, company_email)
+
+2. Revert the payload:
+   Remove: worker_email, company_name, company_location
+   Keep: worker_name, trade, experience, location, job_title, company_email
+
+3. Revert the apply_to_job function:
+   Remove: company = db.query(Company)...
+   Remove: company_data dict
+   Change: await trigger_n8n_webhook(worker_data, job_data, company_data)
+   Back to: await trigger_n8n_webhook(worker_data, job_data, company_email)
+
+4. Restart backend
+
+================================================================================

@@ -1,0 +1,95 @@
+================================================================================
+LOGO INTEGRATION GUIDE
+================================================================================
+
+STEP 1: PREPARE YOUR LOGO
+================================================================================
+
+Recommended specifications:
+- Format: PNG (with transparent background) or SVG (best for scaling)
+- Size: 40px height (width auto) or 120px × 40px
+- Alternative: 200px × 60px (will be scaled down)
+- File name: logo.png or logo.svg
+
+================================================================================
+
+STEP 2: PLACE YOUR LOGO FILE
+================================================================================
+
+Choose ONE of these locations:
+
+OPTION A (Recommended): Public folder
+Location: frontend/public/logo.png
+Usage: Accessible via /logo.png in code
+Best for: Static assets that don't need processing
+
+OPTION B: Assets folder
+Location: frontend/src/assets/logo.png
+Usage: Import in component
+Best for: Assets that need optimization
+
+================================================================================
+
+STEP 3: I'LL UPDATE THE CODE
+================================================================================
+
+Once you place the logo, I'll update:
+1. Header.jsx - Replace gradient box with your logo
+2. Sidebar.jsx - Add logo at top
+3. HomePage.jsx - Use logo in hero section
+
+================================================================================
+
+QUICK SETUP INSTRUCTIONS:
+================================================================================
+
+1. Save your logo as: frontend/public/logo.png
+
+2. Tell me when it's ready, and I'll update the code to use it
+
+3. The logo will appear in:
+   - Header (top center)
+   - Sidebar (top)
+   - Login/Register modals (optional)
+
+================================================================================
+
+CURRENT LOGO LOCATIONS IN CODE:
+================================================================================
+
+1. Header.jsx (Line 58-65)
+   - Currently: Gradient box with "S" letter
+   - Will become: Your logo image
+
+2. Sidebar.jsx (Line 60-62)
+   - Currently: Text "SkillLink"
+   - Will become: Your logo + text
+
+3. HomePage.jsx (Hero section)
+   - Currently: Text only
+   - Can add: Logo above title
+
+================================================================================
+
+EXAMPLE: If you place logo at frontend/public/logo.png
+================================================================================
+
+I'll update Header.jsx to:
+
+<img 
+  src="/logo.png" 
+  alt="SkillLink Logo" 
+  className="h-10 w-auto"
+/>
+
+================================================================================
+
+TELL ME WHEN READY:
+================================================================================
+
+Once you've placed your logo file, just say:
+"Logo uploaded at [location]"
+
+And I'll immediately update all the components to use it!
+
+================================================================================

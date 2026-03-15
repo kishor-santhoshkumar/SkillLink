@@ -1,0 +1,219 @@
+================================================================================
+EMAIL ROUTING - VISUAL DIAGRAM
+================================================================================
+
+BEFORE THE FIX (WRONG)
+================================================================================
+
+Worker applies to job:
+┌─────────────────┐
+│ Worker applies  │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ Backend looks for company email:                                │
+│ 1. Check Company.email (companies table) ← Found: 230697...    │
+│ 2. Use that email ❌                                            │
+└────────┬────────────────────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Email sent to:  │
+│ 230697.ad@...   │ ← WRONG! This is not the company's login email
+└─────────────────┘
+
+Company accepts application:
+┌─────────────────┐
+│ Company accepts │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ Backend looks for company email:                                │
+│ 1. Check Company.email (companies table) ← Found: 230697...    │
+│ 2. Use that email ❌                                            │
+└────────┬────────────────────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Email sent to:  │
+│ 230697.ad@...   │ ← WRONG! Both emails go to same address
+└─────────────────┘
+
+
+AFTER THE FIX (CORRECT)
+================================================================================
+
+Worker applies to job:
+┌─────────────────┐
+│ Worker applies  │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ Backend looks for company email:                                │
+│ 1. Get job.company_id                                           │
+│ 2. Find User where User.id = company_id                         │
+│ 3. Use User.email ✅                                            │
+└────────┬────────────────────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│ Email sent to:          │
+│ company@example.com     │ ← CORRECT! Company's login email
+└─────────────────────────┘
+
+Company accepts application:
+┌─────────────────┐
+│ Company accepts │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ Backend looks for emails:                                       │
+│ 1. Worker email: User.email (from worker's User record) ✅     │
+│ 2. Company email: current_user.email (from User table) ✅      │
+└────────┬────────────────────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│ Email sent to:          │
+│ worker@example.com      │ ← CORRECT! Worker's login email
+│                         │
+│ Contains company info:  │
+│ company@example.com     │ ← CORRECT! Company's login email
+└─────────────────────────┘
+
+
+DATABASE STRUCTURE
+================================================================================
+
+users table (Authentication & Communications)
+┌────┬──────────────┬──────┬─────────────────────────┬──────────────┐
+│ id │ username     │ role │ email                   │ phone_number │
+├────┼──────────────┼──────┼─────────────────────────┼──────────────┤
+│ 1  │ aravind      │worker│ aravind@gmail.com       │ 9876543210   │
+│ 2  │ abc_company  │company│ company@abcconst.com   │ 9876543211   │
+└────┴──────────────┴──────┴─────────────────────────┴──────────────┘
+                                    ▲
+                                    │
+                        THIS IS USED FOR WEBHOOKS ✅
+
+companies table (Profile Information Only)
+┌────┬─────────┬──────────────────┬─────────────────────┬──────────┐
+│ id │ user_id │ company_name     │ email               │ location │
+├────┼─────────┼──────────────────┼─────────────────────┼──────────┤
+│ 1  │    2    │ ABC Construction │ 230697.ad@rmkec.ac.in│ Chennai │
+└────┴─────────┴──────────────────┴─────────────────────┴──────────┘
+                                           ▲
+                                           │
+                            THIS IS IGNORED FOR WEBHOOKS ❌
+
+
+EMAIL FLOW COMPARISON
+================================================================================
+
+BEFORE (Wrong):
+---------------
+Worker: aravind@gmail.com
+Company Login: company@abcconst.com
+Company Profile: 230697.ad@rmkec.ac.in
+
+Application Email → 230697.ad@rmkec.ac.in ❌
+Acceptance Email → 230697.ad@rmkec.ac.in ❌
+
+Result: Both emails go to same wrong address!
+
+AFTER (Correct):
+----------------
+Worker: aravind@gmail.com
+Company Login: company@abcconst.com
+Company Profile: 230697.ad@rmkec.ac.in (ignored)
+
+Application Email → company@abcconst.com ✅
+Acceptance Email → aravind@gmail.com ✅
+
+Result: Each user gets email at their login address!
+
+
+WEBHOOK PAYLOAD COMPARISON
+================================================================================
+
+Webhook 1: Worker Application
+------------------------------
+BEFORE:
+{
+  "company_email": "230697.ad@rmkec.ac.in"  ← From companies.email ❌
+}
+
+AFTER:
+{
+  "company_email": "company@abcconst.com"   ← From users.email ✅
+}
+
+Webhook 2: Job Acceptance
+--------------------------
+BEFORE:
+{
+  "worker_email": "aravind@gmail.com",      ← Correct ✅
+  "company_email": "230697.ad@rmkec.ac.in"  ← From companies.email ❌
+}
+
+AFTER:
+{
+  "worker_email": "aravind@gmail.com",      ← From users.email ✅
+  "company_email": "company@abcconst.com"   ← From users.email ✅
+}
+
+
+CODE LOGIC FLOW
+================================================================================
+
+apply_to_job (Worker Application):
+┌─────────────────────────────────────────────────────────────────┐
+│ 1. Get job.company_id                                           │
+│ 2. Query: User.filter(User.id == job.company_id)               │
+│ 3. Extract: company_user.email                                 │
+│ 4. Send to webhook: company_email = company_user.email         │
+└─────────────────────────────────────────────────────────────────┘
+                              ✅ Uses users.email
+
+accept_application (Job Acceptance):
+┌─────────────────────────────────────────────────────────────────┐
+│ Worker Email:                                                   │
+│ 1. Get worker_resume.user_id                                   │
+│ 2. Query: User.filter(User.id == worker_resume.user_id)        │
+│ 3. Extract: worker_user.email                                  │
+│                                                                 │
+│ Company Email:                                                  │
+│ 1. Use current_user (already from User table)                  │
+│ 2. Extract: current_user.email                                 │
+│                                                                 │
+│ 3. Send to webhook: both emails from users table               │
+└─────────────────────────────────────────────────────────────────┘
+                              ✅ Uses users.email
+
+
+SUMMARY
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────┐
+│                         EMAIL ROUTING                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  users.email (Login Email)                                      │
+│  ├─ Used for authentication                                     │
+│  ├─ Used for webhook notifications ✅                           │
+│  └─ Source of truth for all emails                             │
+│                                                                 │
+│  companies.email (Profile Email)                                │
+│  ├─ Just profile information                                    │
+│  ├─ NOT used for webhooks ❌                                    │
+│  └─ Can be different from login email                          │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+
+Result: Each user receives emails at their login email address! ✅
+
+================================================================================
