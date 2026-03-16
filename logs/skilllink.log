@@ -10057,3 +10057,1084 @@ LINE 1: ...ts_completed, client_rating, reference_available, is_email_v...
 2026-03-13 00:34:03,045 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.012s
 2026-03-13 00:34:37,076 - app.middleware - INFO - Request: GET /notifications/unread-count
 2026-03-13 00:34:37,096 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.019s
+2026-03-16 11:05:33,521 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 11:05:33,543 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 11:05:33,568 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 11:05:33,594 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 11:05:33,885 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 11:05:33,899 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.306s
+2026-03-16 11:05:33,901 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 11:05:33,907 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 11:05:33,917 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 11:05:33,939 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.418s
+2026-03-16 11:05:33,951 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.382s
+2026-03-16 11:05:33,959 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.415s
+2026-03-16 11:05:58,809 - app.middleware - INFO - Request: OPTIONS /auth/google-login
+2026-03-16 11:05:58,813 - app.middleware - INFO - Response: OPTIONS /auth/google-login - Status: 200 - Time: 0.005s
+2026-03-16 11:05:58,830 - app.middleware - INFO - Request: POST /auth/google-login
+2026-03-16 11:06:01,917 - app.routers.auth - INFO - Google login attempt - ID: 117315743233883440720, Email: 230697.ad@rmkec.ac.in, Name: Kishor
+2026-03-16 11:06:01,952 - app.routers.auth - INFO - Google user logged in: kishor
+2026-03-16 11:06:01,963 - app.middleware - INFO - Response: POST /auth/google-login - Status: 200 - Time: 3.134s
+2026-03-16 11:06:02,174 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 11:06:02,176 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.002s
+2026-03-16 11:06:02,186 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 11:06:02,187 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 11:06:02,203 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 11:06:02,205 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 11:06:02,220 - app.middleware - INFO - Request: OPTIONS /jobs/
+2026-03-16 11:06:02,222 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.034s
+2026-03-16 11:06:02,234 - app.middleware - INFO - Response: OPTIONS /jobs/ - Status: 200 - Time: 0.014s
+2026-03-16 11:06:02,237 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.052s
+2026-03-16 11:06:02,240 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:06:02,257 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 11:06:02,362 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.122s
+2026-03-16 11:06:02,387 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 11:06:02,394 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.137s
+2026-03-16 11:06:09,321 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 11:06:09,323 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 11:06:09,324 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.002s
+2026-03-16 11:06:09,326 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.003s
+2026-03-16 11:06:09,332 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 11:06:09,376 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.044s
+2026-03-16 11:06:09,382 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 11:06:09,435 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.053s
+2026-03-16 11:06:09,452 - app.middleware - INFO - Request: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg
+2026-03-16 11:06:09,756 - app.middleware - INFO - Response: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg - Status: 304 - Time: 0.305s
+2026-03-16 11:06:09,759 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 11:06:09,763 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 11:06:09,768 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.009s
+2026-03-16 11:06:09,771 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.007s
+2026-03-16 11:06:09,789 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:06:09,808 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.019s
+2026-03-16 11:06:09,815 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:06:09,834 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.019s
+2026-03-16 11:06:33,111 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:06:33,157 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.046s
+2026-03-16 11:07:03,104 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:07:03,120 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.016s
+2026-03-16 11:07:32,738 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:07:32,774 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.036s
+2026-03-16 11:07:57,000 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:07:57,001 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.001s
+2026-03-16 11:07:57,014 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:07:57,022 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.008s
+2026-03-16 11:07:57,035 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:07:57,057 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.022s
+2026-03-16 11:07:57,064 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:07:57,080 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.016s
+2026-03-16 11:07:57,326 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:07:57,331 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:07:57,340 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.009s
+2026-03-16 11:07:57,349 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:07:57,356 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:07:57,358 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.010s
+2026-03-16 11:07:57,367 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.041s
+2026-03-16 11:07:57,382 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.026s
+2026-03-16 11:07:57,387 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:07:57,401 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.014s
+2026-03-16 11:07:57,558 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 11:07:57,560 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.002s
+2026-03-16 11:07:57,562 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 11:07:57,564 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.001s
+2026-03-16 11:07:57,568 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:07:57,583 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.015s
+2026-03-16 11:07:57,597 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:07:57,615 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.018s
+2026-03-16 11:08:00,338 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:08:00,354 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.015s
+2026-03-16 11:08:00,791 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:08:00,802 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.011s
+2026-03-16 11:08:07,765 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:08:07,779 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.015s
+2026-03-16 11:08:07,792 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:08:07,801 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.010s
+2026-03-16 11:08:08,511 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:08:08,515 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:08:08,589 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.079s
+2026-03-16 11:08:08,604 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.089s
+2026-03-16 11:08:08,612 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:08:08,633 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.021s
+2026-03-16 11:08:08,838 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:08:08,847 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.009s
+2026-03-16 11:08:08,864 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:08:08,887 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.023s
+2026-03-16 11:08:09,047 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:08:09,058 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.011s
+2026-03-16 11:08:09,065 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:08:09,083 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.017s
+2026-03-16 11:08:39,101 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:08:39,110 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 11:08:58,231 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:08:58,233 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:08:58,234 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.003s
+2026-03-16 11:08:58,238 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.005s
+2026-03-16 11:08:58,272 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:08:58,312 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:08:58,364 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.092s
+2026-03-16 11:08:58,373 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.061s
+2026-03-16 11:08:58,453 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 11:08:58,455 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:08:58,456 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.003s
+2026-03-16 11:08:58,460 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.005s
+2026-03-16 11:08:58,462 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:08:58,463 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:08:58,465 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.003s
+2026-03-16 11:08:58,468 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:08:58,476 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:08:58,489 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.026s
+2026-03-16 11:08:58,497 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.029s
+2026-03-16 11:08:58,499 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.023s
+2026-03-16 11:08:58,542 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 11:08:58,544 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.001s
+2026-03-16 11:08:58,548 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:08:58,559 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.011s
+2026-03-16 11:08:58,604 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 11:08:58,605 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.002s
+2026-03-16 11:08:58,612 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:08:58,625 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.013s
+2026-03-16 11:08:58,671 - app.middleware - INFO - Request: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg
+2026-03-16 11:08:58,675 - app.middleware - INFO - Response: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg - Status: 200 - Time: 0.004s
+2026-03-16 11:08:58,704 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 11:08:58,709 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 11:08:58,712 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.008s
+2026-03-16 11:08:58,728 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.019s
+2026-03-16 11:08:58,741 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:08:58,749 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:08:58,777 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.036s
+2026-03-16 11:08:58,779 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.031s
+2026-03-16 11:09:28,833 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:09:28,836 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.004s
+2026-03-16 11:09:28,841 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:09:28,842 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.002s
+2026-03-16 11:09:28,845 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:09:28,852 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:09:28,871 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.026s
+2026-03-16 11:09:28,876 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.024s
+2026-03-16 11:09:28,927 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 11:09:28,929 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:09:28,929 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.003s
+2026-03-16 11:09:28,939 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.010s
+2026-03-16 11:09:28,941 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:09:28,944 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.003s
+2026-03-16 11:09:28,950 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:09:28,954 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:09:28,963 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:09:28,983 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.034s
+2026-03-16 11:09:28,990 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.027s
+2026-03-16 11:09:28,992 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.038s
+2026-03-16 11:09:29,008 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 11:09:29,011 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.003s
+2026-03-16 11:09:29,021 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:09:29,029 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 11:09:29,031 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.002s
+2026-03-16 11:09:29,037 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.016s
+2026-03-16 11:09:29,040 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:09:29,050 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.010s
+2026-03-16 11:09:29,169 - app.middleware - INFO - Request: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg
+2026-03-16 11:09:29,174 - app.middleware - INFO - Response: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg - Status: 200 - Time: 0.005s
+2026-03-16 11:09:29,223 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 11:09:29,280 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 11:09:29,323 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.101s
+2026-03-16 11:09:29,329 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.049s
+2026-03-16 11:09:29,336 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:09:29,339 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:09:29,367 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.031s
+2026-03-16 11:09:29,409 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.070s
+2026-03-16 11:09:59,752 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:09:59,776 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.023s
+2026-03-16 11:10:29,112 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:10:29,130 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.019s
+2026-03-16 11:10:37,595 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:10:37,608 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.013s
+2026-03-16 11:10:37,616 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:10:37,629 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.014s
+2026-03-16 11:10:37,778 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:10:37,788 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:10:37,804 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.026s
+2026-03-16 11:10:37,820 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.033s
+2026-03-16 11:10:37,824 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:10:37,839 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.016s
+2026-03-16 11:10:37,977 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:10:37,992 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.016s
+2026-03-16 11:10:38,005 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:10:38,018 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.013s
+2026-03-16 11:10:38,268 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:10:38,281 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.013s
+2026-03-16 11:10:38,287 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:10:38,301 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.014s
+2026-03-16 11:11:08,106 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:11:08,120 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.014s
+2026-03-16 11:11:21,897 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:11:21,899 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:11:21,900 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.003s
+2026-03-16 11:11:21,903 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.004s
+2026-03-16 11:11:22,013 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:11:22,018 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:11:22,073 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.060s
+2026-03-16 11:11:22,078 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.060s
+2026-03-16 11:11:22,203 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 11:11:22,205 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:11:22,206 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.003s
+2026-03-16 11:11:22,215 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.010s
+2026-03-16 11:11:22,220 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:11:22,226 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.006s
+2026-03-16 11:11:22,234 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:11:22,237 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:11:22,240 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:11:22,269 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.036s
+2026-03-16 11:11:22,277 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.036s
+2026-03-16 11:11:22,282 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.045s
+2026-03-16 11:11:22,317 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:11:22,331 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.015s
+2026-03-16 11:11:22,338 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:11:22,353 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.015s
+2026-03-16 11:11:22,412 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:11:22,422 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.010s
+2026-03-16 11:11:22,427 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:11:22,440 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.014s
+2026-03-16 11:11:53,045 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:11:53,065 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.020s
+2026-03-16 11:12:23,104 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:12:23,113 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 11:12:53,109 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:12:53,120 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.011s
+2026-03-16 11:13:13,298 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:13:13,305 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.007s
+2026-03-16 11:13:13,311 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:13:13,319 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.008s
+2026-03-16 11:13:13,483 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:13:13,485 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:13:13,492 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 11:13:13,496 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.011s
+2026-03-16 11:13:13,502 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:13:13,512 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.010s
+2026-03-16 11:13:13,614 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:13:13,622 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.008s
+2026-03-16 11:13:13,625 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:13:13,635 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.009s
+2026-03-16 11:13:13,867 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:13:13,874 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.007s
+2026-03-16 11:13:13,878 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:13:13,887 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.009s
+2026-03-16 11:13:20,416 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:13:20,428 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.012s
+2026-03-16 11:13:20,446 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:13:20,474 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.028s
+2026-03-16 11:13:21,663 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:13:21,669 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:13:21,695 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.032s
+2026-03-16 11:13:21,698 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.030s
+2026-03-16 11:13:21,713 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:13:21,733 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.020s
+2026-03-16 11:13:21,816 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:13:21,832 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.016s
+2026-03-16 11:13:22,215 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:13:22,231 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.016s
+2026-03-16 11:13:23,012 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:13:23,042 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.030s
+2026-03-16 11:13:23,060 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:13:23,090 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.030s
+2026-03-16 11:13:52,098 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:13:52,118 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.020s
+2026-03-16 11:14:22,099 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:14:22,112 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.013s
+2026-03-16 11:14:52,101 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:14:52,117 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.016s
+2026-03-16 11:58:03,668 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 11:58:03,779 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 11:58:03,967 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 11:58:03,992 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.324s
+2026-03-16 11:58:03,997 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 11:58:04,006 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 11:58:04,014 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.017s
+2026-03-16 11:58:04,066 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 11:58:04,070 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.291s
+2026-03-16 11:58:04,075 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 11:58:04,084 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 11:58:04,090 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.014s
+2026-03-16 11:58:13,105 - app.middleware - INFO - Request: OPTIONS /auth/google-login
+2026-03-16 11:58:13,113 - app.middleware - INFO - Response: OPTIONS /auth/google-login - Status: 200 - Time: 0.008s
+2026-03-16 11:58:13,162 - app.middleware - INFO - Request: POST /auth/google-login
+2026-03-16 11:58:14,925 - app.routers.auth - INFO - Google login attempt - ID: 117315743233883440720, Email: 230697.ad@rmkec.ac.in, Name: Kishor
+2026-03-16 11:58:14,947 - app.routers.auth - INFO - Google user logged in: kishor
+2026-03-16 11:58:14,954 - app.middleware - INFO - Response: POST /auth/google-login - Status: 200 - Time: 1.791s
+2026-03-16 11:58:15,018 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 11:58:15,024 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.005s
+2026-03-16 11:58:15,029 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 11:58:15,030 - app.middleware - INFO - Request: OPTIONS /jobs/
+2026-03-16 11:58:15,030 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 11:58:15,033 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:58:15,035 - app.middleware - INFO - Response: OPTIONS /jobs/ - Status: 200 - Time: 0.005s
+2026-03-16 11:58:15,062 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 11:58:15,064 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 11:58:15,170 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 11:58:15,209 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.176s
+2026-03-16 11:58:15,213 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.184s
+2026-03-16 11:58:15,216 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.186s
+2026-03-16 11:58:15,226 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 11:58:15,230 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.166s
+2026-03-16 11:58:23,911 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 11:58:23,923 - app.middleware - INFO - Request: OPTIONS /jobs/my-applications
+2026-03-16 11:58:23,925 - app.middleware - INFO - Request: OPTIONS /jobs/my-applications
+2026-03-16 11:58:23,929 - app.middleware - INFO - Response: OPTIONS /jobs/my-applications - Status: 200 - Time: 0.007s
+2026-03-16 11:58:23,932 - app.middleware - INFO - Response: OPTIONS /jobs/my-applications - Status: 200 - Time: 0.006s
+2026-03-16 11:58:23,935 - app.middleware - INFO - Request: GET /jobs/my-applications
+2026-03-16 11:58:23,941 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 11:58:23,950 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.039s
+2026-03-16 11:58:24,349 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 11:58:24,389 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 11:58:24,395 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.046s
+2026-03-16 11:58:24,476 - app.middleware - INFO - Response: GET /jobs/my-applications - Status: 200 - Time: 0.541s
+2026-03-16 11:58:24,480 - app.middleware - INFO - Request: GET /jobs/my-applications
+2026-03-16 11:58:24,545 - app.middleware - INFO - Response: GET /jobs/my-applications - Status: 200 - Time: 0.065s
+2026-03-16 11:58:27,168 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 11:58:27,171 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 11:58:27,172 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.004s
+2026-03-16 11:58:27,175 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.005s
+2026-03-16 11:58:27,210 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 11:58:27,273 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.063s
+2026-03-16 11:58:27,278 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 11:58:27,310 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.032s
+2026-03-16 11:58:27,363 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 11:58:27,365 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 11:58:27,366 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.003s
+2026-03-16 11:58:27,372 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.007s
+2026-03-16 11:58:27,400 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:58:27,423 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.023s
+2026-03-16 11:58:27,427 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:58:27,440 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.013s
+2026-03-16 11:58:45,105 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:58:45,113 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.008s
+2026-03-16 11:59:15,107 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:59:15,123 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.016s
+2026-03-16 11:59:32,369 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:59:32,371 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.002s
+2026-03-16 11:59:32,389 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:59:32,396 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.007s
+2026-03-16 11:59:32,403 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:59:32,407 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.005s
+2026-03-16 11:59:32,638 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:59:32,644 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:59:32,646 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.001s
+2026-03-16 11:59:32,647 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:59:32,649 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.002s
+2026-03-16 11:59:32,653 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:59:32,654 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.016s
+2026-03-16 11:59:32,662 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.010s
+2026-03-16 11:59:32,664 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:59:32,672 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.008s
+2026-03-16 11:59:32,762 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 11:59:32,763 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.001s
+2026-03-16 11:59:32,766 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 11:59:32,767 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.001s
+2026-03-16 11:59:32,772 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:59:32,780 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.007s
+2026-03-16 11:59:32,785 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:59:32,791 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.007s
+2026-03-16 11:59:32,963 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:59:32,975 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.012s
+2026-03-16 11:59:32,979 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:59:32,990 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.011s
+2026-03-16 11:59:40,437 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:59:40,439 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 11:59:40,556 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.119s
+2026-03-16 11:59:40,572 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.133s
+2026-03-16 11:59:40,593 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:59:40,610 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:59:40,675 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.082s
+2026-03-16 11:59:40,685 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.075s
+2026-03-16 11:59:40,845 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 11:59:40,850 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:59:40,851 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.006s
+2026-03-16 11:59:40,855 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.006s
+2026-03-16 11:59:40,857 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 11:59:40,863 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.005s
+2026-03-16 11:59:40,876 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:59:40,881 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:59:40,909 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:59:40,926 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.050s
+2026-03-16 11:59:40,943 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.063s
+2026-03-16 11:59:40,950 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.041s
+2026-03-16 11:59:40,980 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:59:40,992 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.012s
+2026-03-16 11:59:40,996 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:59:41,006 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.010s
+2026-03-16 11:59:41,092 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:59:41,103 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.011s
+2026-03-16 11:59:41,107 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:59:41,124 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.016s
+2026-03-16 11:59:52,410 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:59:52,420 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.010s
+2026-03-16 11:59:52,535 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 11:59:52,557 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.022s
+2026-03-16 11:59:52,603 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 11:59:52,635 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:59:52,663 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.059s
+2026-03-16 11:59:52,673 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.037s
+2026-03-16 11:59:52,676 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 11:59:52,692 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.017s
+2026-03-16 11:59:52,889 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:59:52,901 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.013s
+2026-03-16 11:59:52,906 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 11:59:52,919 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.013s
+2026-03-16 11:59:53,005 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:59:53,014 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.009s
+2026-03-16 11:59:53,021 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 11:59:53,030 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.009s
+2026-03-16 12:00:23,110 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:00:23,126 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.017s
+2026-03-16 12:00:32,668 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:00:32,677 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.009s
+2026-03-16 12:00:32,684 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:00:32,692 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.008s
+2026-03-16 12:00:32,815 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:00:32,822 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:00:32,828 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.013s
+2026-03-16 12:00:32,834 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.012s
+2026-03-16 12:00:32,837 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:00:32,842 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.005s
+2026-03-16 12:00:32,955 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:00:32,961 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.006s
+2026-03-16 12:00:32,965 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:00:32,972 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.007s
+2026-03-16 12:00:33,207 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:00:33,216 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.008s
+2026-03-16 12:00:33,219 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:00:33,226 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.007s
+2026-03-16 12:01:03,106 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:01:03,122 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.016s
+2026-03-16 12:02:04,853 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:02:04,863 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.010s
+2026-03-16 12:02:26,490 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:02:26,497 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 12:02:56,492 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:02:56,503 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.011s
+2026-03-16 12:03:28,770 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:03:28,782 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.012s
+2026-03-16 12:03:31,121 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:03:31,127 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.006s
+2026-03-16 12:03:31,138 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:03:31,143 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.006s
+2026-03-16 12:03:31,352 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:03:31,354 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:03:31,366 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.014s
+2026-03-16 12:03:31,371 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.017s
+2026-03-16 12:03:31,376 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:03:31,384 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.009s
+2026-03-16 12:03:31,413 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:03:31,422 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.009s
+2026-03-16 12:03:31,425 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:03:31,432 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.007s
+2026-03-16 12:03:31,576 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:03:31,583 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.007s
+2026-03-16 12:03:31,586 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:03:31,592 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.006s
+2026-03-16 12:03:39,026 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 12:03:39,028 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 12:03:39,030 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 12:03:39,050 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 12:03:39,053 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 12:03:39,057 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 12:03:39,058 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.029s
+2026-03-16 12:03:39,060 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.033s
+2026-03-16 12:03:39,068 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 12:03:39,071 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 12:03:39,075 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.050s
+2026-03-16 12:03:39,082 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 12:03:39,083 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 12:03:39,087 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 12:03:39,091 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.023s
+2026-03-16 12:03:39,092 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 12:03:39,098 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.026s
+2026-03-16 12:03:39,104 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.021s
+2026-03-16 12:04:01,502 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:04:01,510 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.008s
+2026-03-16 12:04:31,490 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:04:31,500 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.010s
+2026-03-16 12:05:01,500 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:05:01,510 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.010s
+2026-03-16 12:05:31,499 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:05:31,509 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.010s
+2026-03-16 12:06:01,492 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:06:01,501 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.010s
+2026-03-16 12:06:31,493 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:06:31,504 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.011s
+2026-03-16 12:07:10,502 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:07:10,511 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 12:08:10,495 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:08:10,505 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.010s
+2026-03-16 12:09:10,502 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:09:10,513 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.012s
+2026-03-16 12:10:10,495 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 12:10:10,498 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.004s
+2026-03-16 12:10:10,503 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:10:10,518 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.015s
+2026-03-16 12:11:10,496 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:11:10,508 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.012s
+2026-03-16 12:12:10,495 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:12:10,506 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.011s
+2026-03-16 12:13:10,510 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:13:10,525 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.015s
+2026-03-16 12:14:10,493 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:14:10,505 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.012s
+2026-03-16 12:15:10,498 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:15:10,510 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.012s
+2026-03-16 12:16:10,499 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:16:10,511 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.012s
+2026-03-16 12:17:10,503 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:17:10,511 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 12:18:10,503 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:18:10,511 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 12:18:24,731 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 12:18:24,737 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 12:18:24,738 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.001s
+2026-03-16 12:18:24,739 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 12:18:24,744 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:18:24,746 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.014s
+2026-03-16 12:18:24,754 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 12:18:24,756 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 12:18:24,757 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.013s
+2026-03-16 12:18:24,762 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:18:24,766 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 12:18:24,769 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 12:18:24,776 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.014s
+2026-03-16 12:18:24,779 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.026s
+2026-03-16 12:18:24,782 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.026s
+2026-03-16 12:18:24,785 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 12:18:24,789 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 12:18:24,791 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.007s
+2026-03-16 12:18:25,260 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:18:25,262 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 12:18:25,263 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 12:18:25,265 - app.middleware - INFO - Request: OPTIONS /jobs/
+2026-03-16 12:18:25,269 - app.middleware - INFO - Response: OPTIONS /jobs/ - Status: 200 - Time: 0.005s
+2026-03-16 12:18:25,275 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 12:18:25,277 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 12:18:25,278 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 12:18:25,283 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.023s
+2026-03-16 12:18:25,290 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 12:18:25,291 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.029s
+2026-03-16 12:18:25,292 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.029s
+2026-03-16 12:18:25,297 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.022s
+2026-03-16 12:18:55,494 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:18:55,505 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.011s
+2026-03-16 12:43:26,787 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 12:43:26,829 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.041s
+2026-03-16 12:43:26,996 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:43:27,033 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.037s
+2026-03-16 12:43:39,825 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 12:43:39,827 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 12:43:39,839 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 12:43:39,840 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 12:43:39,849 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.022s
+2026-03-16 12:43:39,854 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.029s
+2026-03-16 12:43:39,861 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 12:43:39,863 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.002s
+2026-03-16 12:43:39,871 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:43:39,881 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.010s
+2026-03-16 12:43:39,959 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 12:43:39,962 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:43:39,964 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 12:43:39,983 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.021s
+2026-03-16 12:43:39,984 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 12:43:39,986 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 12:43:39,997 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.038s
+2026-03-16 12:43:40,001 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.037s
+2026-03-16 12:43:40,266 - app.middleware - INFO - Request: OPTIONS /jobs/
+2026-03-16 12:43:40,269 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:43:40,271 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 12:43:40,273 - app.middleware - INFO - Response: OPTIONS /jobs/ - Status: 200 - Time: 0.007s
+2026-03-16 12:43:40,279 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 12:43:40,294 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 12:43:40,298 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 12:43:40,694 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 12:43:40,702 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 12:43:40,702 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.434s
+2026-03-16 12:43:40,711 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.440s
+2026-03-16 12:43:40,716 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.438s
+2026-03-16 12:43:40,720 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.426s
+2026-03-16 12:44:46,549 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:44:46,577 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.028s
+2026-03-16 12:44:51,292 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 12:44:51,295 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.002s
+2026-03-16 12:44:51,298 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 12:44:51,300 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.003s
+2026-03-16 12:44:51,346 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 12:44:51,381 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.035s
+2026-03-16 12:44:51,402 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 12:44:51,457 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.056s
+2026-03-16 12:44:51,507 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 12:44:51,510 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 12:44:51,513 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.006s
+2026-03-16 12:44:51,528 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.017s
+2026-03-16 12:44:51,556 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:44:51,571 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.015s
+2026-03-16 12:44:51,576 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:44:51,585 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.009s
+2026-03-16 12:44:55,945 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:44:55,962 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.017s
+2026-03-16 12:44:56,026 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:44:56,042 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.016s
+2026-03-16 12:44:56,117 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 12:44:56,122 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:44:56,126 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.009s
+2026-03-16 12:44:56,129 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 12:44:56,134 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:44:56,136 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.006s
+2026-03-16 12:44:56,161 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.039s
+2026-03-16 12:44:56,177 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.042s
+2026-03-16 12:44:56,180 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:44:56,191 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.011s
+2026-03-16 12:44:56,243 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 12:44:56,244 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 12:44:56,245 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.001s
+2026-03-16 12:44:56,246 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.002s
+2026-03-16 12:44:56,250 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:44:56,261 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.011s
+2026-03-16 12:44:56,266 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:44:56,276 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.010s
+2026-03-16 12:44:56,367 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:44:56,379 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.012s
+2026-03-16 12:44:56,395 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:44:56,407 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.011s
+2026-03-16 12:45:26,520 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:45:26,529 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 12:45:56,488 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:45:56,497 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 12:46:26,486 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:46:26,493 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 12:46:54,133 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:46:54,137 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.003s
+2026-03-16 12:46:54,140 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:46:54,145 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.005s
+2026-03-16 12:46:54,210 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:46:54,212 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:46:54,220 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 12:46:54,223 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.011s
+2026-03-16 12:46:54,225 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:46:54,232 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.007s
+2026-03-16 12:46:54,338 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:46:54,343 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.005s
+2026-03-16 12:46:54,345 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:46:54,349 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.004s
+2026-03-16 12:46:54,414 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:46:54,419 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.005s
+2026-03-16 12:46:54,421 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:46:54,427 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.005s
+2026-03-16 12:47:24,499 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:47:24,507 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 12:47:37,050 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 12:47:37,053 - app.middleware - INFO - Request: OPTIONS /jobs/my-applications
+2026-03-16 12:47:37,055 - app.middleware - INFO - Response: OPTIONS /jobs/my-applications - Status: 200 - Time: 0.002s
+2026-03-16 12:47:37,064 - app.middleware - INFO - Request: OPTIONS /jobs/my-applications
+2026-03-16 12:47:37,095 - app.middleware - INFO - Request: GET /jobs/my-applications
+2026-03-16 12:47:37,097 - app.middleware - INFO - Response: OPTIONS /jobs/my-applications - Status: 200 - Time: 0.032s
+2026-03-16 12:47:37,097 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 12:47:37,107 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.057s
+2026-03-16 12:47:37,114 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 12:47:37,123 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 12:47:37,133 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.019s
+2026-03-16 12:47:37,147 - app.middleware - INFO - Response: GET /jobs/my-applications - Status: 200 - Time: 0.052s
+2026-03-16 12:47:37,151 - app.middleware - INFO - Request: GET /jobs/my-applications
+2026-03-16 12:47:37,186 - app.middleware - INFO - Response: GET /jobs/my-applications - Status: 200 - Time: 0.035s
+2026-03-16 12:47:43,865 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 12:47:43,878 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.013s
+2026-03-16 12:47:43,882 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 12:47:43,899 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.017s
+2026-03-16 12:47:43,913 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:47:43,921 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.008s
+2026-03-16 12:47:43,923 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:47:43,931 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.009s
+2026-03-16 12:47:47,683 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 12:47:47,684 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 12:47:47,684 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.001s
+2026-03-16 12:47:47,685 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.002s
+2026-03-16 12:47:47,688 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:47:47,689 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 12:47:47,698 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.009s
+2026-03-16 12:47:47,699 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.011s
+2026-03-16 12:47:47,757 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 12:47:47,777 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 12:47:47,783 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.026s
+2026-03-16 12:47:47,787 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.011s
+2026-03-16 12:47:47,790 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 12:47:47,798 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.008s
+2026-03-16 12:47:47,800 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:47:47,802 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:47:47,810 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 12:47:47,831 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.029s
+2026-03-16 12:47:47,833 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.033s
+2026-03-16 12:47:47,836 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.028s
+2026-03-16 12:47:47,887 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 12:47:47,888 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 12:47:47,889 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.001s
+2026-03-16 12:47:47,890 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.002s
+2026-03-16 12:47:47,894 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:47:47,896 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 12:47:47,907 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.013s
+2026-03-16 12:47:47,915 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.019s
+2026-03-16 12:47:48,070 - app.middleware - INFO - Request: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg
+2026-03-16 12:47:48,186 - app.middleware - INFO - Response: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg - Status: 200 - Time: 0.116s
+2026-03-16 12:47:48,187 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 12:47:48,188 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 12:47:48,188 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.001s
+2026-03-16 12:47:48,189 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.001s
+2026-03-16 12:47:48,194 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:47:48,198 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 12:47:48,203 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.005s
+2026-03-16 12:47:48,204 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.010s
+2026-03-16 12:48:17,765 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:48:17,772 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 12:48:48,500 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:48:48,511 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.011s
+2026-03-16 12:49:18,701 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:49:18,716 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.014s
+2026-03-16 12:49:48,490 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:49:48,543 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.053s
+2026-03-16 12:50:18,499 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 12:50:18,517 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.018s
+2026-03-16 17:14:16,517 - app.middleware - INFO - Request: GET /
+2026-03-16 17:14:16,535 - app.middleware - INFO - Response: GET / - Status: 200 - Time: 0.018s
+2026-03-16 17:14:25,510 - app.middleware - INFO - Request: GET /favicon.ico
+2026-03-16 17:14:25,512 - app.middleware - INFO - Response: GET /favicon.ico - Status: 404 - Time: 0.002s
+2026-03-16 17:15:27,440 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 17:15:27,441 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.002s
+2026-03-16 17:15:27,444 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 17:15:27,450 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.006s
+2026-03-16 17:15:27,453 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 17:15:27,456 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 17:15:27,461 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:15:27,688 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 17:15:27,845 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.384s
+2026-03-16 17:15:27,851 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:15:27,859 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.406s
+2026-03-16 17:15:27,886 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 17:15:27,896 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 17:15:27,906 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.056s
+2026-03-16 17:15:27,914 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.458s
+2026-03-16 17:15:27,930 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 17:15:27,939 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 17:15:27,950 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.054s
+2026-03-16 17:15:27,957 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 17:15:27,960 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.021s
+2026-03-16 17:15:28,016 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 17:15:28,020 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 17:15:28,021 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 17:15:28,022 - app.middleware - INFO - Request: OPTIONS /jobs/
+2026-03-16 17:15:28,022 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.006s
+2026-03-16 17:15:28,026 - app.middleware - INFO - Response: OPTIONS /jobs/ - Status: 200 - Time: 0.004s
+2026-03-16 17:15:28,042 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 17:15:28,044 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:15:28,051 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 17:15:28,055 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 17:15:28,191 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.169s
+2026-03-16 17:15:28,193 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.173s
+2026-03-16 17:15:28,218 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.174s
+2026-03-16 17:15:28,227 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 17:15:28,237 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.195s
+2026-03-16 17:15:35,879 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 17:15:35,885 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.006s
+2026-03-16 17:15:35,890 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 17:15:35,892 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.002s
+2026-03-16 17:15:35,932 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:15:35,962 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.030s
+2026-03-16 17:15:35,969 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:15:35,991 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.022s
+2026-03-16 17:15:36,008 - app.middleware - INFO - Request: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg
+2026-03-16 17:15:36,180 - app.middleware - INFO - Response: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg - Status: 200 - Time: 0.172s
+2026-03-16 17:15:36,182 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 17:15:36,183 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 17:15:36,185 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.002s
+2026-03-16 17:15:36,186 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.003s
+2026-03-16 17:15:36,191 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:15:36,215 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.025s
+2026-03-16 17:15:36,219 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:15:36,232 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.013s
+2026-03-16 17:15:58,496 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:15:58,524 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.029s
+2026-03-16 17:16:28,496 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:16:28,510 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.014s
+2026-03-16 17:16:58,497 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:16:58,504 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 17:17:28,513 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:17:28,533 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.019s
+2026-03-16 17:17:41,311 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:17:41,318 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.007s
+2026-03-16 17:17:41,333 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:17:41,341 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.008s
+2026-03-16 17:17:41,669 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:17:41,676 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 17:17:41,678 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.002s
+2026-03-16 17:17:41,681 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 17:17:41,681 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.001s
+2026-03-16 17:17:41,683 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.014s
+2026-03-16 17:17:41,684 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 17:17:41,692 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.007s
+2026-03-16 17:17:41,695 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 17:17:41,702 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.007s
+2026-03-16 17:17:41,749 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 17:17:41,751 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.002s
+2026-03-16 17:17:41,760 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 17:17:41,771 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.011s
+2026-03-16 17:17:41,964 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 17:17:41,970 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.006s
+2026-03-16 17:17:42,150 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:17:42,157 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.007s
+2026-03-16 17:17:42,160 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:17:42,166 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.006s
+2026-03-16 17:18:12,498 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:18:12,505 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 17:18:41,675 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:18:41,683 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.008s
+2026-03-16 17:18:45,506 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:18:45,586 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.080s
+2026-03-16 17:18:45,599 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:18:45,630 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.031s
+2026-03-16 17:18:45,662 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:18:45,663 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:18:45,679 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.017s
+2026-03-16 17:18:45,698 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.035s
+2026-03-16 17:18:45,704 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:18:45,729 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.025s
+2026-03-16 17:18:45,859 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:18:45,867 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.008s
+2026-03-16 17:18:45,882 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:18:45,902 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.020s
+2026-03-16 17:18:50,339 - app.middleware - INFO - Request: OPTIONS /jobs/my-applications
+2026-03-16 17:18:50,340 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 17:18:50,342 - app.middleware - INFO - Response: OPTIONS /jobs/my-applications - Status: 200 - Time: 0.004s
+2026-03-16 17:18:50,345 - app.middleware - INFO - Request: OPTIONS /jobs/my-applications
+2026-03-16 17:18:50,351 - app.middleware - INFO - Response: OPTIONS /jobs/my-applications - Status: 200 - Time: 0.007s
+2026-03-16 17:18:50,358 - app.middleware - INFO - Request: GET /jobs/my-applications
+2026-03-16 17:18:50,365 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 17:18:50,376 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.036s
+2026-03-16 17:18:50,740 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 17:18:50,763 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 17:18:50,781 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.042s
+2026-03-16 17:18:50,802 - app.middleware - INFO - Response: GET /jobs/my-applications - Status: 200 - Time: 0.443s
+2026-03-16 17:18:50,808 - app.middleware - INFO - Request: GET /jobs/my-applications
+2026-03-16 17:18:50,881 - app.middleware - INFO - Response: GET /jobs/my-applications - Status: 200 - Time: 0.073s
+2026-03-16 17:19:16,493 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:19:16,502 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 17:19:46,498 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:19:46,511 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.013s
+2026-03-16 17:20:16,499 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:20:16,507 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 17:20:46,498 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:20:46,507 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.009s
+2026-03-16 17:21:16,491 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:21:16,499 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 17:21:46,490 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:21:46,501 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.011s
+2026-03-16 17:23:10,497 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:23:10,504 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 17:27:17,144 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 17:27:17,145 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.001s
+2026-03-16 17:27:17,152 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:27:17,182 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.030s
+2026-03-16 17:27:20,536 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 17:27:20,538 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.002s
+2026-03-16 17:27:20,545 - app.middleware - INFO - Request: OPTIONS /resumes/
+2026-03-16 17:27:20,554 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:27:20,562 - app.middleware - INFO - Response: OPTIONS /resumes/ - Status: 200 - Time: 0.016s
+2026-03-16 17:27:20,615 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.062s
+2026-03-16 17:27:20,626 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:27:20,652 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.026s
+2026-03-16 17:27:20,678 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 17:27:20,680 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 17:27:20,682 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.004s
+2026-03-16 17:27:20,683 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.003s
+2026-03-16 17:27:20,688 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:27:20,701 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.013s
+2026-03-16 17:27:20,705 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:27:20,718 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.012s
+2026-03-16 17:27:34,251 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 17:27:34,289 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 17:27:34,315 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.064s
+2026-03-16 17:27:34,348 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.059s
+2026-03-16 17:27:34,359 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:27:34,380 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:27:34,399 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.040s
+2026-03-16 17:27:34,402 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.022s
+2026-03-16 17:27:34,543 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 17:27:34,546 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 17:27:34,547 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.004s
+2026-03-16 17:27:34,550 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.004s
+2026-03-16 17:27:34,556 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 17:27:34,559 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:27:34,561 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.005s
+2026-03-16 17:27:34,566 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 17:27:34,574 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 17:27:34,590 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.031s
+2026-03-16 17:27:34,599 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.024s
+2026-03-16 17:27:34,600 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.034s
+2026-03-16 17:27:34,630 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 17:27:34,631 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 17:27:34,632 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.002s
+2026-03-16 17:27:34,634 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.003s
+2026-03-16 17:27:34,643 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 17:27:34,645 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 17:27:34,660 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.014s
+2026-03-16 17:27:34,662 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.019s
+2026-03-16 17:27:34,732 - app.middleware - INFO - Request: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg
+2026-03-16 17:27:34,742 - app.middleware - INFO - Response: GET /uploads/72d60453-1bf2-4444-86b5-9d7e6d9694fb.jpeg - Status: 200 - Time: 0.009s
+2026-03-16 17:27:34,760 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 17:27:34,761 - app.middleware - INFO - Request: OPTIONS /resumes/68/template-recommendations
+2026-03-16 17:27:34,763 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.003s
+2026-03-16 17:27:34,765 - app.middleware - INFO - Response: OPTIONS /resumes/68/template-recommendations - Status: 200 - Time: 0.004s
+2026-03-16 17:27:34,779 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:27:34,788 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:27:34,807 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.028s
+2026-03-16 17:27:34,811 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.023s
+2026-03-16 17:28:05,504 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:28:05,517 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.013s
+2026-03-16 17:28:35,492 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:28:35,506 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.014s
+2026-03-16 17:29:04,553 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:29:04,569 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.016s
+2026-03-16 17:29:35,282 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:29:35,300 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.018s
+2026-03-16 17:29:46,709 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 17:29:46,712 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 17:29:46,721 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 17:29:46,722 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 17:29:46,772 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 17:29:46,774 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 17:29:46,775 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 17:29:46,786 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 17:29:46,787 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.076s
+2026-03-16 17:29:46,790 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.069s
+2026-03-16 17:29:46,795 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.086s
+2026-03-16 17:29:46,803 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.081s
+2026-03-16 17:30:04,380 - app.middleware - INFO - Request: OPTIONS /auth/google-login
+2026-03-16 17:30:04,382 - app.middleware - INFO - Response: OPTIONS /auth/google-login - Status: 200 - Time: 0.002s
+2026-03-16 17:30:04,434 - app.middleware - INFO - Request: POST /auth/google-login
+2026-03-16 17:30:06,213 - app.routers.auth - INFO - Google login attempt - ID: 117315743233883440720, Email: 230697.ad@rmkec.ac.in, Name: Kishor
+2026-03-16 17:30:06,222 - app.routers.auth - INFO - Google user logged in: kishor
+2026-03-16 17:30:06,227 - app.middleware - INFO - Response: POST /auth/google-login - Status: 200 - Time: 1.793s
+2026-03-16 17:30:06,316 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:30:06,319 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 17:30:06,321 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 17:30:06,333 - app.middleware - INFO - Request: OPTIONS /jobs/
+2026-03-16 17:30:06,336 - app.middleware - INFO - Response: OPTIONS /jobs/ - Status: 200 - Time: 0.003s
+2026-03-16 17:30:06,346 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 17:30:06,347 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 17:30:06,352 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 17:30:06,359 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.043s
+2026-03-16 17:30:06,375 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.056s
+2026-03-16 17:30:06,376 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 17:30:06,385 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.063s
+2026-03-16 17:30:06,390 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.038s
+2026-03-16 17:30:12,556 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:30:12,587 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.031s
+2026-03-16 17:30:12,592 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:30:12,625 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.033s
+2026-03-16 17:30:12,670 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:30:12,679 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.010s
+2026-03-16 17:30:12,684 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:30:12,692 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.007s
+2026-03-16 17:30:36,495 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:30:36,502 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.007s
+2026-03-16 17:31:06,503 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:31:06,517 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.015s
+2026-03-16 17:31:36,496 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:31:36,509 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.013s
+2026-03-16 17:32:06,494 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:32:06,505 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.011s
+2026-03-16 17:32:36,504 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:32:36,561 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.057s
+2026-03-16 17:32:46,114 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 17:32:46,121 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 17:32:46,128 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:32:46,177 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 17:32:46,244 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 17:32:46,330 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.203s
+2026-03-16 17:32:46,338 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.217s
+2026-03-16 17:32:46,340 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.226s
+2026-03-16 17:32:46,346 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 17:32:46,351 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:32:46,359 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 17:32:46,373 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.023s
+2026-03-16 17:32:46,377 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 17:32:46,380 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 17:32:46,389 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.043s
+2026-03-16 17:32:46,391 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.032s
+2026-03-16 17:32:46,617 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:32:46,620 - app.middleware - INFO - Request: GET /workers/
+2026-03-16 17:32:46,622 - app.middleware - INFO - Request: GET /companies/
+2026-03-16 17:32:46,624 - app.middleware - INFO - Request: GET /jobs/
+2026-03-16 17:32:46,652 - app.routers.worker - INFO - Public worker list fetched: 7 results (published_only=True)
+2026-03-16 17:32:46,655 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.038s
+2026-03-16 17:32:46,659 - app.routers.job - INFO - Retrieved 7 job requests for user 1
+2026-03-16 17:32:46,663 - app.middleware - INFO - Response: GET /workers/ - Status: 200 - Time: 0.043s
+2026-03-16 17:32:46,666 - app.middleware - INFO - Response: GET /jobs/ - Status: 200 - Time: 0.043s
+2026-03-16 17:32:47,006 - app.routers.company - INFO - Retrieved 3 companies
+2026-03-16 17:32:47,010 - app.middleware - INFO - Response: GET /companies/ - Status: 200 - Time: 0.389s
+2026-03-16 17:32:51,218 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:32:51,259 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.042s
+2026-03-16 17:32:51,263 - app.middleware - INFO - Request: GET /resumes/
+2026-03-16 17:32:51,289 - app.middleware - INFO - Response: GET /resumes/ - Status: 200 - Time: 0.025s
+2026-03-16 17:32:51,335 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:32:51,350 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.015s
+2026-03-16 17:32:51,357 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:32:51,375 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.018s
+2026-03-16 17:33:17,499 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:33:17,506 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.006s
+2026-03-16 17:33:47,490 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:33:47,507 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.017s
+2026-03-16 17:33:54,848 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:33:54,856 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.007s
+2026-03-16 17:33:54,861 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:33:54,878 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.017s
+2026-03-16 17:33:55,046 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:33:55,049 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 17:33:55,060 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.014s
+2026-03-16 17:33:55,062 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.013s
+2026-03-16 17:33:55,065 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 17:33:55,071 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.006s
+2026-03-16 17:33:55,151 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 17:33:55,156 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.006s
+2026-03-16 17:33:55,159 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 17:33:55,166 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.007s
+2026-03-16 17:33:55,426 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:33:55,435 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.008s
+2026-03-16 17:33:55,438 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:33:55,446 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.007s
+2026-03-16 17:34:25,500 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:34:25,509 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.010s
+2026-03-16 17:34:55,502 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:34:55,510 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.008s
+2026-03-16 17:35:25,492 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:35:25,505 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.013s
+2026-03-16 17:35:50,594 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 17:35:50,599 - app.middleware - INFO - Request: OPTIONS /auth/me
+2026-03-16 17:35:50,601 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.039s
+2026-03-16 17:35:50,604 - app.middleware - INFO - Response: OPTIONS /auth/me - Status: 200 - Time: 0.006s
+2026-03-16 17:35:50,608 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:35:50,611 - app.middleware - INFO - Request: GET /auth/me
+2026-03-16 17:35:50,632 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.024s
+2026-03-16 17:35:50,635 - app.middleware - INFO - Response: GET /auth/me - Status: 200 - Time: 0.024s
+2026-03-16 17:35:50,798 - app.middleware - INFO - Request: OPTIONS /notifications/unread-count
+2026-03-16 17:35:50,799 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 17:35:50,801 - app.middleware - INFO - Response: OPTIONS /notifications/unread-count - Status: 200 - Time: 0.002s
+2026-03-16 17:35:50,803 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.003s
+2026-03-16 17:35:50,805 - app.middleware - INFO - Request: OPTIONS /resumes/68
+2026-03-16 17:35:50,809 - app.middleware - INFO - Request: GET /notifications/unread-count
+2026-03-16 17:35:50,810 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 17:35:50,812 - app.middleware - INFO - Response: OPTIONS /resumes/68 - Status: 200 - Time: 0.006s
+2026-03-16 17:35:50,825 - app.middleware - INFO - Request: GET /resumes/68
+2026-03-16 17:35:50,835 - app.middleware - INFO - Response: GET /notifications/unread-count - Status: 200 - Time: 0.026s
+2026-03-16 17:35:50,841 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.030s
+2026-03-16 17:35:50,846 - app.middleware - INFO - Response: GET /resumes/68 - Status: 200 - Time: 0.021s
+2026-03-16 17:35:50,864 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 17:35:50,866 - app.middleware - INFO - Request: OPTIONS /resumes/68/publish-status
+2026-03-16 17:35:50,866 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.002s
+2026-03-16 17:35:50,868 - app.middleware - INFO - Response: OPTIONS /resumes/68/publish-status - Status: 200 - Time: 0.003s
+2026-03-16 17:35:50,871 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 17:35:50,874 - app.middleware - INFO - Request: GET /resumes/68/publish-status
+2026-03-16 17:35:50,887 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.013s
+2026-03-16 17:35:50,891 - app.middleware - INFO - Response: GET /resumes/68/publish-status - Status: 200 - Time: 0.020s
+2026-03-16 17:35:50,939 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:35:50,950 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.011s
+2026-03-16 17:35:50,963 - app.middleware - INFO - Request: GET /resumes/68/template-recommendations
+2026-03-16 17:35:50,971 - app.middleware - INFO - Response: GET /resumes/68/template-recommendations - Status: 200 - Time: 0.008s

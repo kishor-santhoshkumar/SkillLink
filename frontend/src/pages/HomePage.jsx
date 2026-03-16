@@ -426,11 +426,11 @@ const HomePage = () => {
               
               {/* Left Column - Content */}
               <div className="text-center lg:text-left animate-slide-in-left">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#1e40af] mb-6 leading-tight max-w-2xl mx-auto lg:mx-0">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight max-w-2xl mx-auto lg:mx-0" style={{background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
                   SkillLink
                 </h1>
                 
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2563EB] mb-6 max-w-2xl mx-auto lg:mx-0">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1F3A5F] mb-6 max-w-2xl mx-auto lg:mx-0">
                   Hire Skilled Workers Faster
                 </h2>
                 
@@ -557,7 +557,7 @@ const HomePage = () => {
                                       onClick={() => setCurrentWorkerIndex(index)}
                                       className={`transition-all duration-300 rounded-full ${
                                         index === (currentWorkerIndex % jobOpenings.length)
-                                          ? 'w-6 h-2 bg-[#1e40af]'
+                                          ? 'w-6 h-2 bg-[#FF6B35]'
                                           : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
                                       }`}
                                       aria-label={`View job ${index + 1}`}
@@ -569,11 +569,11 @@ const HomePage = () => {
                           ) : (
                             <div className="flex items-center justify-between gap-4 p-6 bg-white rounded-xl shadow-sm">
                               <div className="flex items-center gap-4 flex-1">
-                                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                                <div className="w-16 h-16 bg-gradient-to-br from-[#FF6B35] to-[#F7931E] rounded-full flex items-center justify-center">
                                   <span className="text-3xl">🏢</span>
                                 </div>
                                 <div className="flex-1">
-                                  <div className="font-bold text-[#1e40af] text-lg">No Job Openings Yet</div>
+                                  <div className="font-bold text-[#FF6B35] text-lg">No Job Openings Yet</div>
                                   <div className="text-sm text-slate-600">Check back soon!</div>
                                 </div>
                               </div>

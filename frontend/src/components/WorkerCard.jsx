@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Briefcase, Star, Phone, Wrench, Car, Award } from 'lucide-react';
+import { MapPin, Briefcase, Star, Phone, Wrench, Car, Award, Mail, Shield } from 'lucide-react';
 import VerificationBadges from './VerificationBadges';
+import ProfileBadgeRing from './ProfileBadgeRing';
 import { useRef, useEffect } from 'react';
 
 const WorkerCard = ({ worker }) => {
@@ -91,24 +92,32 @@ const WorkerCard = ({ worker }) => {
           backgroundSize: '20px 20px'
         }}></div>
         
-        {photoUrl ? (
-          <img
-            src={photoUrl}
-            alt={worker.full_name}
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-24 h-24 rounded-full border-4 border-white object-cover shadow-xl transition-transform duration-300 group-hover:scale-110 z-10"
-            onError={(e) => {
-              e.target.style.display = 'none';
-              e.target.nextSibling.style.display = 'flex';
-            }}
-          />
-        ) : null}
-        <div 
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-24 h-24 rounded-full border-4 border-white bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center shadow-xl transition-transform duration-300 group-hover:scale-110 z-10"
-          style={{ display: photoUrl ? 'none' : 'flex' }}
-        >
-          <span className="text-3xl font-bold text-slate-600">
-            {worker.full_name?.charAt(0) || '?'}
-          </span>
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-10">
+          <div className="relative">
+            {photoUrl ? (
+              <img
+                src={photoUrl}
+                alt={worker.full_name}
+                className="w-24 h-24 rounded-full border-4 border-white object-cover shadow-xl transition-transform duration-300 group-hover:scale-110"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+            ) : null}
+            <div 
+              className="w-24 h-24 rounded-full border-4 border-white bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center shadow-xl transition-transform duration-300 group-hover:scale-110"
+              style={{ display: photoUrl ? 'none' : 'flex' }}
+            >
+              <span className="text-3xl font-bold text-slate-600">
+                {worker.full_name?.charAt(0) || '?'}
+              </span>
+            </div>
+            {/* Badge Ring */}
+            <div className="absolute -inset-4">
+              <ProfileBadgeRing worker={worker} size="sm" demo={true} />
+            </div>
+          </div>
         </div>
         {isVerified && (
           <div className="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 shadow-lg animate-glow-pulse">
@@ -120,6 +129,36 @@ const WorkerCard = ({ worker }) => {
 
       {/* Content */}
       <div className="pt-14 px-6 pb-6">
+        {/* Verification Sources */}
+        {(worker.is_email_verified || worker.is_phone_verified || worker.is_identity_verified || worker.is_background_checked) && (
+          <div className="flex flex-wrap gap-1.5 justify-center mb-3">
+            {worker.is_email_verified && (
+              <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-blue-50 text-blue-700 text-xs rounded-full font-medium border border-blue-200">
+                <Mail className="w-2.5 h-2.5" />
+                Email
+              </span>
+            )}
+            {worker.is_phone_verified && (
+              <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-green-50 text-green-700 text-xs rounded-full font-medium border border-green-200">
+                <Phone className="w-2.5 h-2.5" />
+                Phone
+              </span>
+            )}
+            {worker.is_identity_verified && (
+              <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-purple-50 text-purple-700 text-xs rounded-full font-medium border border-purple-200">
+                <Shield className="w-2.5 h-2.5" />
+                Identity
+              </span>
+            )}
+            {worker.is_background_checked && (
+              <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-amber-50 text-amber-700 text-xs rounded-full font-medium border border-amber-200">
+                <Award className="w-2.5 h-2.5" />
+                Background
+              </span>
+            )}
+          </div>
+        )}
+        
         {/* Name and Trade */}
         <div className="text-center mb-4">
           <h3 className="text-xl font-bold text-[#1F3A5F] mb-1 group-hover:text-[#2563EB] transition-colors">

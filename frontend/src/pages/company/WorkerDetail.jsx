@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, MapPin, Briefcase, Star, Phone, Mail, Download,
-  Wrench, Car, Award, Calendar, Languages, GraduationCap
+  Wrench, Car, Award, Calendar, Languages, GraduationCap, CheckCircle, Shield
 } from 'lucide-react';
 import { getWorkerProfile, getReviews, downloadResume } from '../../services/api';
+import ProfileBadgeRing from '../../components/ProfileBadgeRing';
 
 const WorkerDetail = () => {
   const { workerId } = useParams();
@@ -109,26 +110,43 @@ const WorkerDetail = () => {
       {/* Profile Header */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
         <div className="relative h-48 bg-gradient-to-br from-[#1F3A5F] to-[#2563EB]">
-          {photoUrl ? (
-            <img
-              src={photoUrl}
-              alt={worker.full_name}
-              className="absolute bottom-0 left-8 transform translate-y-1/2 w-32 h-32 rounded-full border-4 border-white object-cover shadow-lg"
-              onError={(e) => {
-                // Fallback to initials if image fails to load
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'flex';
-              }}
-            />
-          ) : null}
-          <div 
-            className="absolute bottom-0 left-8 transform translate-y-1/2 w-32 h-32 rounded-full border-4 border-white bg-slate-200 flex items-center justify-center shadow-lg"
-            style={{ display: photoUrl ? 'none' : 'flex' }}
-          >
-            <span className="text-5xl font-bold text-slate-500">
-              {worker.full_name?.charAt(0) || '?'}
-            </span>
+          <div className="absolute bottom-0 left-8 transform translate-y-1/2">
+            <div className="relative inline-block">
+              {photoUrl ? (
+                <img
+                  src={photoUrl}
+                  alt={worker.full_name}
+                  className="w-32 h-32 rounded-full border-4 border-white object-cover shadow-lg"
+                  onError={(e) => {
+                    // Fallback to initials if image fails to load
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+              ) : null}
+              <div 
+                className="w-32 h-32 rounded-full border-4 border-white bg-slate-200 flex items-center justify-center shadow-lg"
+                style={{ display: photoUrl ? 'none' : 'flex' }}
+              >
+                <span className="text-5xl font-bold text-slate-500">
+                  {worker.full_name?.charAt(0) || '?'}
+                </span>
+              </div>
+              
+              {/* LinkedIn-style Verification Badge - Bottom Right */}
+              <div className="absolute bottom-0 right-0 bg-white rounded-full p-1.5 shadow-lg border-2 border-[#2563EB]">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-1.5 flex items-center justify-center">
+                  <CheckCircle className="w-5 h-5 text-white" />
+                </div>
+              </div>
+            </div>
+            
+            {/* Badge Ring */}
+            <div className="absolute -inset-6">
+              <ProfileBadgeRing worker={worker} size="md" demo={true} />
+            </div>
           </div>
+          
           {isVerified && (
             <div className="absolute top-6 right-6 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
               <Award className="w-4 h-4" />
@@ -215,6 +233,25 @@ const WorkerDetail = () => {
                 <p className="text-xs text-slate-500">Projects</p>
                 <p className="font-semibold text-slate-700">{worker.projects_completed || 0} completed</p>
               </div>
+            </div>
+          </div>
+
+          {/* Verification Sources */}
+          <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <p className="text-xs text-slate-600 font-medium mb-3">Verified through:</p>
+            <div className="flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium border border-blue-300">
+                <Mail className="w-3 h-3" />
+                Email
+              </span>
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium border border-green-300">
+                <Phone className="w-3 h-3" />
+                Phone
+              </span>
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-purple-100 text-purple-700 text-xs rounded-full font-medium border border-purple-300">
+                <Shield className="w-3 h-3" />
+                Identity
+              </span>
             </div>
           </div>
         </div>

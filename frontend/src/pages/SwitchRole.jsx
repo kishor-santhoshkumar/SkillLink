@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Wrench, Building2, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useRole } from '../context/RoleContext';
 import { useAuth } from '../context/AuthContext';
 
@@ -27,7 +27,7 @@ const SwitchRole = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 flex items-center justify-center px-4 py-8">
       {/* Back Button */}
       <button
         onClick={handleGoBack}
@@ -53,103 +53,39 @@ const SwitchRole = () => {
           {/* Worker Card */}
           <button
             onClick={() => handleRoleSelect('worker')}
-            className="group relative bg-gradient-to-br from-[#1F3A5F] to-[#2563EB] rounded-3xl p-12 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            className="group relative rounded-3xl p-12 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden min-h-[500px] flex flex-col justify-end"
+            style={{
+              backgroundImage: 'url(/worker-role-bg.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
           >
-            {/* Emoji/Icon */}
-            <div className="mb-8">
-              <div className="w-32 h-32 mx-auto bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300">
-                <Wrench className="w-16 h-16 text-white" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              👷 Worker
-            </h2>
-
-            {/* Description */}
-            <p className="text-lg text-blue-100 mb-6">
-              Create your professional profile, showcase your skills, and find job opportunities
-            </p>
-
-            {/* Features */}
-            <ul className="text-left space-y-2 mb-8">
-              <li className="flex items-center gap-2 text-white">
-                <span className="text-green-400">✓</span>
-                <span>Build digital profile</span>
-              </li>
-              <li className="flex items-center gap-2 text-white">
-                <span className="text-green-400">✓</span>
-                <span>Get hired by companies</span>
-              </li>
-              <li className="flex items-center gap-2 text-white">
-                <span className="text-green-400">✓</span>
-                <span>Receive ratings & reviews</span>
-              </li>
-              <li className="flex items-center gap-2 text-white">
-                <span className="text-green-400">✓</span>
-                <span>View job opportunities</span>
-              </li>
-            </ul>
-
-            {/* Button */}
-            <div className="px-8 py-4 bg-white text-[#1F3A5F] rounded-xl font-bold text-lg group-hover:shadow-lg transition-shadow">
+            {/* Button at bottom */}
+            <div className="px-8 py-4 bg-white text-[#1F3A5F] rounded-xl font-bold text-lg group-hover:shadow-lg transition-shadow text-center">
               Continue as Worker
             </div>
 
             {/* Hover Effect Border */}
-            <div className="absolute inset-0 rounded-3xl border-4 border-transparent group-hover:border-white/30 transition-colors duration-300"></div>
+            <div className="absolute inset-0 rounded-3xl border-4 border-transparent group-hover:border-white/30 transition-colors duration-300 pointer-events-none"></div>
           </button>
 
           {/* Company Card */}
           <button
             onClick={() => handleRoleSelect('company')}
-            className="group relative bg-gradient-to-br from-[#2563EB] to-[#1F3A5F] rounded-3xl p-12 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            className="group relative rounded-3xl p-12 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden min-h-[500px] flex flex-col justify-end"
+            style={{
+              backgroundImage: 'url(/company-role-bg.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
           >
-            {/* Emoji/Icon */}
-            <div className="mb-8">
-              <div className="w-32 h-32 mx-auto bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300">
-                <Building2 className="w-16 h-16 text-white" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              🏢 Company
-            </h2>
-
-            {/* Description */}
-            <p className="text-lg text-blue-100 mb-6">
-              Find and hire skilled workers, post job opportunities, and build your team
-            </p>
-
-            {/* Features */}
-            <ul className="text-left space-y-2 mb-8">
-              <li className="flex items-center gap-2 text-white">
-                <span className="text-green-400">✓</span>
-                <span>Search skilled workers</span>
-              </li>
-              <li className="flex items-center gap-2 text-white">
-                <span className="text-green-400">✓</span>
-                <span>View detailed profiles</span>
-              </li>
-              <li className="flex items-center gap-2 text-white">
-                <span className="text-green-400">✓</span>
-                <span>Post job requests</span>
-              </li>
-              <li className="flex items-center gap-2 text-white">
-                <span className="text-green-400">✓</span>
-                <span>Contact workers directly</span>
-              </li>
-            </ul>
-
-            {/* Button */}
-            <div className="px-8 py-4 bg-white text-[#1F3A5F] rounded-xl font-bold text-lg group-hover:shadow-lg transition-shadow">
+            {/* Button at bottom */}
+            <div className="px-8 py-4 bg-white text-[#1F3A5F] rounded-xl font-bold text-lg group-hover:shadow-lg transition-shadow text-center">
               Continue as Company
             </div>
 
             {/* Hover Effect Border */}
-            <div className="absolute inset-0 rounded-3xl border-4 border-transparent group-hover:border-white/30 transition-colors duration-300"></div>
+            <div className="absolute inset-0 rounded-3xl border-4 border-transparent group-hover:border-white/30 transition-colors duration-300 pointer-events-none"></div>
           </button>
         </div>
 

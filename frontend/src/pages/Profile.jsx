@@ -3,9 +3,10 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { 
   User, MapPin, Phone, Languages, Download, Loader2, 
   Briefcase, Wrench, GraduationCap, Award, CheckCircle,
-  Clock, DollarSign, Car, Tool, AlertCircle, Star
+  Clock, DollarSign, Car, Tool, AlertCircle, Star, Mail, Shield
 } from 'lucide-react';
 import axios from 'axios';
+import ProfileBadgeRing from '../components/ProfileBadgeRing';
 
 const Profile = () => {
   const [searchParams] = useSearchParams();
@@ -190,19 +191,55 @@ const Profile = () => {
         {/* Header Card */}
         <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row gap-6 items-start">
-            {/* Profile Photo */}
-            <div className="flex-shrink-0">
-              {profile.profile_photo ? (
-                <img
-                  src={`http://127.0.0.1:8000${profile.profile_photo}`}
-                  alt={profile.full_name}
-                  className="w-32 h-32 rounded-full object-cover border-4 border-[#2563EB] shadow-lg"
-                />
-              ) : (
-                <div className="w-32 h-32 rounded-full bg-slate-200 border-4 border-[#2563EB] flex items-center justify-center">
-                  <User className="w-16 h-16 text-slate-400" />
+            {/* Profile Photo Section */}
+            <div className="flex flex-col items-center">
+              {/* Photo with Badge Ring */}
+              <div className="relative">
+                <div className="relative inline-block">
+                  {profile.profile_photo ? (
+                    <img
+                      src={`http://127.0.0.1:8000${profile.profile_photo}`}
+                      alt={profile.full_name}
+                      className="w-32 h-32 rounded-full object-cover border-4 border-[#2563EB] shadow-lg"
+                    />
+                  ) : (
+                    <div className="w-32 h-32 rounded-full bg-slate-200 border-4 border-[#2563EB] flex items-center justify-center">
+                      <User className="w-16 h-16 text-slate-400" />
+                    </div>
+                  )}
+                  
+                  {/* LinkedIn-style Verification Badge - Bottom Right */}
+                  <div className="absolute bottom-1 right-1 bg-white rounded-full p-1 shadow-lg border-2 border-[#2563EB]">
+                    <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-1 flex items-center justify-center">
+                      <CheckCircle className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
                 </div>
-              )}
+              </div>
+              
+              {/* Badge Ring */}
+              <div className="relative -mt-8 mb-4">
+                <ProfileBadgeRing worker={profile} size="md" demo={true} />
+              </div>
+              
+              {/* Verification Sources - Below Photo */}
+              <div className="mt-2 text-center w-full">
+                <p className="text-xs text-slate-600 font-medium mb-2">Verified through:</p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 text-blue-700 text-xs rounded-full font-medium border border-blue-200">
+                    <Mail className="w-3 h-3" />
+                    Email
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-green-50 text-green-700 text-xs rounded-full font-medium border border-green-200">
+                    <Phone className="w-3 h-3" />
+                    Phone
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-purple-50 text-purple-700 text-xs rounded-full font-medium border border-purple-200">
+                    <Shield className="w-3 h-3" />
+                    Identity
+                  </span>
+                </div>
+              </div>
             </div>
 
             {/* Profile Info */}
