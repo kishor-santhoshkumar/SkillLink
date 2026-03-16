@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Users, Clock, CheckCircle, Star } from 'lucide-react';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const MyWorkers = () => {
   const [activeTab, setActiveTab] = useState('in-progress');
   const [workers, setWorkers] = useState([]);
@@ -25,18 +27,18 @@ const MyWorkers = () => {
     }
     // If it starts with /uploads/, use as is
     if (normalizedPath.startsWith('/uploads/')) {
-      return `http://127.0.0.1:8000${normalizedPath}`;
+      return `${API_URL}${normalizedPath}`;
     }
     // If it starts with uploads/ (no leading slash)
     if (normalizedPath.startsWith('uploads/')) {
-      return `http://127.0.0.1:8000/${normalizedPath}`;
+      return `${API_URL}/${normalizedPath}`;
     }
     // If it's just the filename
     if (!normalizedPath.includes('/')) {
-      return `http://127.0.0.1:8000/uploads/${normalizedPath}`;
+      return `${API_URL}/uploads/${normalizedPath}`;
     }
     // Default: prepend base URL
-    return `http://127.0.0.1:8000/${normalizedPath}`;
+    return `${API_URL}/${normalizedPath}`;
   };
 
   useEffect(() => {
@@ -48,7 +50,7 @@ const MyWorkers = () => {
       setLoading(true);
       const token = localStorage.getItem('token');
       const response = await axios.get(
-        `http://127.0.0.1:8000/jobs/my-workers?status=${activeTab}`,
+        `${API_URL}/jobs/my-workers?status=${activeTab}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setWorkers(response.data);
@@ -65,7 +67,7 @@ const MyWorkers = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://127.0.0.1:8000/jobs/${jobId}/complete`,
+        `${API_URL}/jobs/${jobId}/complete`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -86,7 +88,7 @@ const MyWorkers = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get(
-        `http://127.0.0.1:8000/resumes/${worker.worker_id}/reviews`,
+        `${API_URL}/resumes/${worker.worker_id}/reviews`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
@@ -118,7 +120,7 @@ const MyWorkers = () => {
       const companyUser = JSON.parse(localStorage.getItem('user'));
       
       await axios.post(
-        `http://127.0.0.1:8000/resumes/${selectedWorker.worker_id}/reviews`,
+        `${API_URL}/resumes/${selectedWorker.worker_id}/reviews`,
         {
           client_name: companyUser?.username || 'Company',
           rating: rating,

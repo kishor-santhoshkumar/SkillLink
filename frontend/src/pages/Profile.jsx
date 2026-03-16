@@ -8,6 +8,8 @@ import {
 import axios from 'axios';
 import ProfileBadgeRing from '../components/ProfileBadgeRing';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const Profile = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ const Profile = () => {
     console.log('Fetching all profiles...');
     try {
       setLoading(true);
-      const response = await axios.get('http://127.0.0.1:8000/resumes/');
+      const response = await axios.get(`${API_URL}/resumes/`);
       console.log('Profiles response:', response.data);
       if (response.data && response.data.length > 0) {
         setAllProfiles(response.data);
@@ -67,7 +69,7 @@ const Profile = () => {
   const fetchProfile = async (id) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://127.0.0.1:8000/resumes/${id}`);
+      const response = await axios.get(`${API_URL}/resumes/${id}`);
       setProfile(response.data);
       setError('');
     } catch (err) {
@@ -83,7 +85,7 @@ const Profile = () => {
     try {
       setDownloading(true);
       const response = await axios.get(
-        `http://127.0.0.1:8000/resumes/${profile.id}/download`,
+        `${API_URL}/resumes/${profile.id}/download`,
         { responseType: 'blob' }
       );
 
@@ -198,7 +200,7 @@ const Profile = () => {
                 <div className="relative inline-block">
                   {profile.profile_photo ? (
                     <img
-                      src={`http://127.0.0.1:8000${profile.profile_photo}`}
+                      src={`${API_URL}${profile.profile_photo}`}
                       alt={profile.full_name}
                       className="w-32 h-32 rounded-full object-cover border-4 border-[#2563EB] shadow-lg"
                     />

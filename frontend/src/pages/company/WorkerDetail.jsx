@@ -7,6 +7,8 @@ import {
 import { getWorkerProfile, getReviews, downloadResume } from '../../services/api';
 import ProfileBadgeRing from '../../components/ProfileBadgeRing';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const WorkerDetail = () => {
   const { workerId } = useParams();
   const navigate = useNavigate();
@@ -32,21 +34,21 @@ const WorkerDetail = () => {
     
     // If it starts with /uploads/, use as is
     if (normalizedPath.startsWith('/uploads/')) {
-      return `http://127.0.0.1:8000${normalizedPath}`;
+      return `${API_URL}${normalizedPath}`;
     }
     
     // If it starts with uploads/ (no leading slash)
     if (normalizedPath.startsWith('uploads/')) {
-      return `http://127.0.0.1:8000/${normalizedPath}`;
+      return `${API_URL}/${normalizedPath}`;
     }
     
     // If it's just the filename
     if (!normalizedPath.includes('/')) {
-      return `http://127.0.0.1:8000/uploads/${normalizedPath}`;
+      return `${API_URL}/uploads/${normalizedPath}`;
     }
     
     // Default: prepend base URL
-    return `http://127.0.0.1:8000/${normalizedPath}`;
+    return `${API_URL}/${normalizedPath}`;
   };
 
   const loadWorkerData = async () => {

@@ -26,6 +26,8 @@ import { useRole } from '../context/RoleContext';
 import LoginModal from '../components/LoginModal';
 import RegisterModal from '../components/RegisterModal';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 // Profile Options Modal Component
 const ProfileOptionsModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -247,7 +249,7 @@ const HomePage = () => {
 
   const fetchPublishedWorkers = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/workers/');
+      const response = await fetch(`${API_URL}/workers/`);
       const workers = await response.json();
       
       // Get only published workers
@@ -269,7 +271,7 @@ const HomePage = () => {
 
   const fetchCompanies = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/companies/');
+      const response = await fetch(`${API_URL}/companies/`);
       const companiesData = await response.json();
       setCompanies(companiesData);
       console.log('Fetched companies:', companiesData);
@@ -284,7 +286,7 @@ const HomePage = () => {
       const token = localStorage.getItem('token');
       const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
       
-      const response = await fetch('http://127.0.0.1:8000/jobs/', { headers });
+      const response = await fetch(`${API_URL}/jobs/`, { headers });
       if (response.ok) {
         const jobs = await response.json();
         console.log('Fetched jobs:', jobs); // Debug log
@@ -327,7 +329,7 @@ const HomePage = () => {
     // Check if user has a profile
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://127.0.0.1:8000/resumes/me', {
+      const response = await fetch(`${API_URL}/resumes/me`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

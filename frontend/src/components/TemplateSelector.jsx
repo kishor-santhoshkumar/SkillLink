@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { FileText, Check, Sparkles, Eye, Download, Star } from 'lucide-react';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const TemplateSelector = ({ selectedTemplate, onSelect, onSave, saving = false, profileId }) => {
   const [hoveredTemplate, setHoveredTemplate] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
@@ -70,7 +72,7 @@ const TemplateSelector = ({ selectedTemplate, onSelect, onSave, saving = false, 
     setLoadingRecommendations(true);
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/resumes/${profileId}/template-recommendations`
+        `${API_URL}/resumes/${profileId}/template-recommendations`
       );
       setRecommendations(response.data.recommendations || []);
     } catch (err) {
@@ -86,7 +88,7 @@ const TemplateSelector = ({ selectedTemplate, onSelect, onSave, saving = false, 
     setPreviewingTemplate(templateId);
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/resumes/${profileId}/preview?template=${templateId}`,
+        `${API_URL}/resumes/${profileId}/preview?template=${templateId}`,
         { responseType: 'blob' }
       );
       

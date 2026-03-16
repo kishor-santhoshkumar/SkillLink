@@ -3,6 +3,8 @@ import { Bell, X, Check } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const NotificationBell = () => {
   const { isAuthenticated } = useAuth();
   const [notifications, setNotifications] = useState([]);
@@ -22,7 +24,7 @@ const NotificationBell = () => {
   const fetchUnreadCount = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://127.0.0.1:8000/notifications/unread-count', {
+      const response = await axios.get(`${API_URL}/notifications/unread-count`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUnreadCount(response.data.count);
@@ -35,7 +37,7 @@ const NotificationBell = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://127.0.0.1:8000/notifications/', {
+      const response = await axios.get(`${API_URL}/notifications/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(response.data);
@@ -50,7 +52,7 @@ const NotificationBell = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://127.0.0.1:8000/notifications/${notificationId}/read`,
+        `${API_URL}/notifications/${notificationId}/read`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -65,7 +67,7 @@ const NotificationBell = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        'http://127.0.0.1:8000/notifications/mark-all-read',
+        `${API_URL}/notifications/mark-all-read`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

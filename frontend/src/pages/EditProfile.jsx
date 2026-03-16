@@ -4,6 +4,8 @@ import { ArrowLeft, User, Mail, Phone, Save, AlertCircle } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const EditProfile = () => {
   const navigate = useNavigate();
   const { user, setUser } = useAuth();
@@ -43,7 +45,7 @@ const EditProfile = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        'http://127.0.0.1:8000/auth/profile',
+        `${API_URL}/auth/profile`,
         {
           username: formData.username,
           email: formData.email,

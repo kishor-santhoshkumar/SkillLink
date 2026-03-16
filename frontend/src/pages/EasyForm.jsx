@@ -5,6 +5,8 @@ import axios from 'axios';
 import TradeSelector from '../components/TradeSelector';
 import SpecializationSection from '../components/SpecializationSection';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const EasyForm = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
@@ -115,7 +117,7 @@ const EasyForm = () => {
       };
 
       // Create profile
-      const response = await axios.post('http://127.0.0.1:8000/resumes/structured', submitData);
+      const response = await axios.post(`${API_URL}/resumes/structured`, submitData);
       const createdResume = response.data;
 
       // Upload photo if provided
@@ -125,7 +127,7 @@ const EasyForm = () => {
 
         try {
           await axios.post(
-            `http://127.0.0.1:8000/resumes/${createdResume.id}/upload-photo`,
+            `${API_URL}/resumes/${createdResume.id}/upload-photo`,
             photoFormData,
             {
               headers: {

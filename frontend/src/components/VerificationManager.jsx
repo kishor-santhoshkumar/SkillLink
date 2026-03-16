@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { CheckCircle, Mail, Phone, Shield, AlertCircle, Loader } from 'lucide-react';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const VerificationManager = ({ workerId, onUpdate }) => {
   const [badges, setBadges] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ const VerificationManager = ({ workerId, onUpdate }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://127.0.0.1:8000/verification/workers/${workerId}/badges`
+        `${API_URL}/verification/workers/${workerId}/badges`
       );
       setBadges(response.data.badges);
       setError(null);
@@ -34,7 +36,7 @@ const VerificationManager = ({ workerId, onUpdate }) => {
       const token = localStorage.getItem('token');
       
       await axios.patch(
-        `http://127.0.0.1:8000/verification/workers/${workerId}/${badgeType}`,
+        `${API_URL}/verification/workers/${workerId}/${badgeType}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -62,7 +64,7 @@ const VerificationManager = ({ workerId, onUpdate }) => {
       const token = localStorage.getItem('token');
       
       await axios.patch(
-        `http://127.0.0.1:8000/verification/workers/${workerId}/revoke/${badgeType}`,
+        `${API_URL}/verification/workers/${workerId}/revoke/${badgeType}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

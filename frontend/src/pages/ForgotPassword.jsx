@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mail, Lock, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1); // 1: email, 2: reset
@@ -20,7 +22,7 @@ const ForgotPassword = () => {
     setMessage('');
 
     try {
-      await axios.post('http://127.0.0.1:8000/auth/forgot-password', null, {
+      await axios.post(`${API_URL}/auth/forgot-password`, null, {
         params: { email }
       });
       setMessage('✅ Password reset link sent to your email');
@@ -51,7 +53,7 @@ const ForgotPassword = () => {
     setLoading(true);
 
     try {
-      await axios.post('http://127.0.0.1:8000/auth/reset-password', null, {
+      await axios.post(`${API_URL}/auth/reset-password`, null, {
         params: {
           email,
           new_password: newPassword

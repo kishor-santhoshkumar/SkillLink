@@ -5,6 +5,8 @@
 import { useState } from 'react';
 import { uploadPhoto, getPhotoUrl } from '../services/api';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const PhotoUpload = ({ workerId, currentPhotoUrl, onPhotoUploaded }) => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
@@ -36,7 +38,7 @@ const PhotoUpload = ({ workerId, currentPhotoUrl, onPhotoUploaded }) => {
       const response = await uploadPhoto(workerId, file);
       
       // Update preview
-      const newPhotoUrl = `${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'}${response.photo_url}`;
+      const newPhotoUrl = `${API_URL}${response.photo_url}`;
       setPreview(newPhotoUrl);
       
       // Notify parent component

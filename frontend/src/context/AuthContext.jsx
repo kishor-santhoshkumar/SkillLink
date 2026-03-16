@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/auth/me');
+      const response = await axios.get(`${API_URL}/auth/me`);
       setUser(response.data);
       console.log('User info fetched:', response.data);
     } catch (error) {

@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { useRole } from '../context/RoleContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
   const navigate = useNavigate();
   const { switchRole } = useRole();
@@ -33,7 +35,7 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
     }
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/auth/register', formData);
+      const response = await axios.post(`${API_URL}/auth/register`, formData);
       
       // Sync role before login
       switchRole(formData.role);

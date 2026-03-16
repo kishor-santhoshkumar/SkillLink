@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { GoogleLogin } from '@react-oauth/google';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -21,7 +23,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
     setError('');
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/auth/login', formData);
+      const response = await axios.post(`${API_URL}/auth/login`, formData);
       
       // Login with user data (role is automatically set from user.role)
       login(response.data);
@@ -49,7 +51,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
 
     try {
       console.log('Sending token to backend...');
-      const response = await axios.post('http://127.0.0.1:8000/auth/google-login', {
+      const response = await axios.post(`${API_URL}/auth/google-login`, {
         token: credentialResponse.credential
       });
       

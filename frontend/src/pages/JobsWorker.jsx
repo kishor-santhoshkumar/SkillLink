@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Briefcase, MapPin, Wrench, Clock, DollarSign, Filter } from 'lucide-react';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const JobsWorker = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +24,7 @@ const JobsWorker = () => {
   const fetchJobs = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://127.0.0.1:8000/jobs/', {
+      const response = await axios.get(`${API_URL}/jobs/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setJobs(response.data);
@@ -36,7 +38,7 @@ const JobsWorker = () => {
   const fetchMyApplications = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://127.0.0.1:8000/jobs/my-applications', {
+      const response = await axios.get(`${API_URL}/jobs/my-applications`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -63,7 +65,7 @@ const JobsWorker = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://127.0.0.1:8000/jobs/${selectedJob.id}/apply`,
+        `${API_URL}/jobs/${selectedJob.id}/apply`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -88,7 +90,7 @@ const JobsWorker = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.delete(
-        `http://127.0.0.1:8000/jobs/${jobId}/cancel-application`,
+        `${API_URL}/jobs/${jobId}/cancel-application`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert('Application cancelled successfully!');

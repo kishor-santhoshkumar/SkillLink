@@ -4,6 +4,8 @@ import VerificationBadges from './VerificationBadges';
 import ProfileBadgeRing from './ProfileBadgeRing';
 import { useRef, useEffect } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const WorkerCard = ({ worker }) => {
   const navigate = useNavigate();
   const cardRef = useRef(null);
@@ -48,21 +50,21 @@ const WorkerCard = ({ worker }) => {
     
     // If it starts with /uploads/, use as is
     if (normalizedPath.startsWith('/uploads/')) {
-      return `http://127.0.0.1:8000${normalizedPath}`;
+      return `${API_URL}${normalizedPath}`;
     }
     
     // If it starts with uploads/ (no leading slash)
     if (normalizedPath.startsWith('uploads/')) {
-      return `http://127.0.0.1:8000/${normalizedPath}`;
+      return `${API_URL}/${normalizedPath}`;
     }
     
     // If it's just the filename
     if (!normalizedPath.includes('/')) {
-      return `http://127.0.0.1:8000/uploads/${normalizedPath}`;
+      return `${API_URL}/uploads/${normalizedPath}`;
     }
     
     // Default: prepend base URL
-    return `http://127.0.0.1:8000/${normalizedPath}`;
+    return `${API_URL}/${normalizedPath}`;
   };
 
   const photoUrl = getPhotoUrl(worker.profile_photo);

@@ -3,6 +3,8 @@ import { FileText, Sparkles, Download, Loader2, CheckCircle, Camera, X, Upload, 
 import axios from 'axios';
 import VoiceRecorder from '../components/VoiceRecorder';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const ParagraphPage = () => {
   const [methodSelected, setMethodSelected] = useState(false); // Track if user selected input method
   const [inputMode, setInputMode] = useState('type'); // 'type' or 'voice'
@@ -119,7 +121,7 @@ const ParagraphPage = () => {
 
     try {
       // Step 1: Create profile
-      const response = await axios.post('http://127.0.0.1:8000/resumes/', formData);
+      const response = await axios.post(`${API_URL}/resumes/`, formData);
       const createdResume = response.data;
       
       // Step 2: Upload photo if provided
@@ -131,7 +133,7 @@ const ParagraphPage = () => {
 
         try {
           const photoUploadResponse = await axios.post(
-            `http://127.0.0.1:8000/resumes/${createdResume.id}/upload-photo`,
+            `${API_URL}/resumes/${createdResume.id}/upload-photo`,
             photoFormData,
             {
               headers: {
@@ -142,7 +144,7 @@ const ParagraphPage = () => {
           console.log('Photo upload response:', photoUploadResponse.data);
           
           // Fetch updated resume data with photo
-          const updatedResponse = await axios.get(`http://127.0.0.1:8000/resumes/${createdResume.id}`);
+          const updatedResponse = await axios.get(`${API_URL}/resumes/${createdResume.id}`);
           console.log('Updated resume with photo:', updatedResponse.data);
           console.log('Photo path:', updatedResponse.data.profile_photo);
           setResumeData(updatedResponse.data);
@@ -173,7 +175,7 @@ const ParagraphPage = () => {
 
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/resumes/${resumeData.id}/download`,
+        `${API_URL}/resumes/${resumeData.id}/download`,
         { responseType: 'blob' }
       );
 
@@ -597,7 +599,7 @@ const ParagraphPage = () => {
                     <div className="flex-shrink-0">
                       <img
                         src={resumeData.profile_photo 
-                          ? `http://127.0.0.1:8000${resumeData.profile_photo.startsWith('/') ? '' : '/'}${resumeData.profile_photo}`
+                          ? `${API_URL}${resumeData.profile_photo.startsWith('/') ? '' : '/'}${resumeData.profile_photo}`
                           : photoPreview
                         }
                         alt="Profile"

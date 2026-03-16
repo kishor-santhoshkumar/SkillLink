@@ -3,6 +3,8 @@ import { Briefcase, Plus, Users, MapPin, Wrench, DollarSign, Clock, X, Eye } fro
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const CompanyJobs = () => {
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
@@ -31,7 +33,7 @@ const CompanyJobs = () => {
   const fetchJobs = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://127.0.0.1:8000/jobs/', {
+      const response = await axios.get(`${API_URL}/jobs/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setJobs(response.data);
@@ -52,7 +54,7 @@ const CompanyJobs = () => {
     setPosting(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://127.0.0.1:8000/jobs/', formData, {
+      await axios.post(`${API_URL}/jobs/`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Job posted successfully!');
@@ -81,7 +83,7 @@ const CompanyJobs = () => {
     // Fetch real applicants from API
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://127.0.0.1:8000/jobs/${job.id}/applications`, {
+      const response = await axios.get(`${API_URL}/jobs/${job.id}/applications`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setApplicants(response.data);
@@ -95,7 +97,7 @@ const CompanyJobs = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://127.0.0.1:8000/jobs/applications/${applicationId}/accept`,
+        `${API_URL}/jobs/applications/${applicationId}/accept`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -120,7 +122,7 @@ const CompanyJobs = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://127.0.0.1:8000/jobs/${jobId}/close`,
+        `${API_URL}/jobs/${jobId}/close`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -137,7 +139,7 @@ const CompanyJobs = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://127.0.0.1:8000/jobs/${jobId}/reopen`,
+        `${API_URL}/jobs/${jobId}/reopen`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -8,6 +8,8 @@ import axios from 'axios';
 import { publishProfile, unpublishProfile, getPublishStatus } from '../services/api';
 import TemplateSelector from '../components/TemplateSelector';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 const ProfileSimple = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -43,27 +45,27 @@ const ProfileSimple = () => {
     
     // If it starts with /uploads/, use as is
     if (normalizedPath.startsWith('/uploads/')) {
-      return `http://127.0.0.1:8000${normalizedPath}`;
+      return `${API_URL}${normalizedPath}`;
     }
     
     // If it starts with uploads/ (no leading slash)
     if (normalizedPath.startsWith('uploads/')) {
-      return `http://127.0.0.1:8000/${normalizedPath}`;
+      return `${API_URL}/${normalizedPath}`;
     }
     
     // If it's just the filename
     if (!normalizedPath.includes('/')) {
-      return `http://127.0.0.1:8000/uploads/${normalizedPath}`;
+      return `${API_URL}/uploads/${normalizedPath}`;
     }
     
     // Default: prepend base URL
-    return `http://127.0.0.1:8000/${normalizedPath}`;
+    return `${API_URL}/${normalizedPath}`;
   };
 
   const fetchProfile = async (id) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://127.0.0.1:8000/resumes/${id}`);
+      const response = await axios.get(`${API_URL}/resumes/${id}`);
       console.log('Profile data:', response.data);
       console.log('Photo path:', response.data.profile_photo);
       setProfile(response.data);
@@ -92,7 +94,7 @@ const ProfileSimple = () => {
   const fetchLatestProfile = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://127.0.0.1:8000/resumes/');
+      const response = await axios.get(`${API_URL}/resumes/`);
       if (response.data && response.data.length > 0) {
         const latest = response.data[0];
         setProfile(latest);
@@ -113,7 +115,7 @@ const ProfileSimple = () => {
     if (!profile?.id) return;
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/resumes/${profile.id}/download`,
+        `${API_URL}/resumes/${profile.id}/download`,
         { responseType: 'blob' }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -162,7 +164,7 @@ const ProfileSimple = () => {
     setTemplateSaving(true);
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/resumes/${profile.id}`,
+        `${API_URL}/resumes/${profile.id}`,
         { resume_template: selectedTemplate }
       );
       
