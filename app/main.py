@@ -21,6 +21,8 @@ app = FastAPI(
     description="AI-powered platform for skilled worker profiles, ratings, and job matching",
     version="3.0.0"
 )
+# Add logging middleware
+app.add_middleware(LoggingMiddleware)
 
 # Configure CORS
 app.add_middleware(
@@ -37,8 +39,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Add logging middleware
-app.add_middleware(LoggingMiddleware)
+
 
 # Create database tables on startup
 Base.metadata.create_all(bind=engine)
