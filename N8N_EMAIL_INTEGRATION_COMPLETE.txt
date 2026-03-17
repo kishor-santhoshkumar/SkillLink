@@ -1,0 +1,192 @@
+================================================================================
+N8N EMAIL NOTIFICATION INTEGRATION - COMPLETE
+================================================================================
+
+✅ IMPLEMENTATION COMPLETE
+
+FEATURE: Automatic Email Notification via n8n Webhook
+When a worker applies to a job, the system now:
+1. Saves application to database
+2. Creates in-app notification
+3. Triggers n8n webhook to send email to company
+
+================================================================================
+TECHNICAL DETAILS
+================================================================================
+
+WEBHOOK URL:
+https://kishorsanthoshkumar.app.n8n.cloud/webhook/worker-application
+
+PAYLOAD SENT TO N8N:
+{
+  "worker_name": "Aravind Raj",
+  "trade": "Plumber",
+  "experience": "8 years",
+  "location": "Coimbatore, Tamil Nadu",
+  "job_title": "Senior Plumber",
+  "company_email": "sihkishor3@gmail.com"
+}
+
+================================================================================
+FLOW DIAGRAM
+================================================================================
+
+Worker clicks "Apply Now"
+         ↓
+Frontend: POST /jobs/{job_id}/apply
+         ↓
+Backend performs 3 actions:
+         ↓
+    ┌────┴────┬────────────┬──────────────┐
+    ↓         ↓            ↓              ↓
+Save to DB  Create      Trigger n8n    Return
+            Notification  Webhook       Success
+    ↓         ↓            ↓              ↓
+job_        notifications  →Email sent   Frontend
+applications table        to company    shows success
+
+================================================================================
+DATABASE STRUCTURE
+================================================================================
+
+Table: job_applications (already exists)
+- id (Primary Key)
+- job_id (Foreign Key → job_requests)
+- worker_id (Foreign Key → resumes)
+- status (pending/accepted/rejected)
+- created_at
+- updated_at
+
+================================================================================
+ERROR HANDLING
+================================================================================
+
+✓ Duplicate application check
+  → Returns: "You have already applied for this job"
+
+✓ Job not found
+  → Returns: "Job not found"
+
+✓ Job closed
+  → Returns: "Job is not open for applications"
+
+✓ No worker profile
+  → Returns: "Please create your profile first"
+
+✓ Webhook failure
+  → Application still saved
+  → Error logged but doesn't fail the request
+  → User sees success message
+
+================================================================================
+SETUP INSTRUCTIONS
+================================================================================
+
+STEP 1: Install httpx package
+----------------------------
+pip install httpx==0.26.0
+
+Or run:
+pip install -r requirements.txt
+
+
+STEP 2: Restart backend
+----------------------------
+restart_backend.bat
+
+
+STEP 3: Test the integration
+----------------------------
+1. Worker applies to a job
+2. Check database: job_applications table has new record
+3. Check company dashboard: Application appears
+4. Check company email: Should receive notification email
+
+
+================================================================================
+N8N WORKFLOW SETUP (For Reference)
+================================================================================
+
+Your n8n workflow should:
+1. Receive webhook POST request
+2. Extract data from payload
+3. Send email using Gmail node
+
+Email Template Example:
+-----------------------
+Subject: New Worker Application - SkillLink
+
+Hello,
+
+A new worker has applied for your job posting.
+
+Worker Details:
+- Name: {{worker_name}}
+- Trade: {{trade}}
+- Experience: {{experience}}
+- Location: {{location}}
+
+Job: {{job_title}}
+
+Please log in to SkillLink to review the application.
+
+Best regards,
+SkillLink Team
+
+================================================================================
+TESTING
+================================================================================
+
+Test Webhook Manually:
+curl -X POST https://kishorsanthoshkumar.app.n8n.cloud/webhook/worker-application \
+  -H "Content-Type: application/json" \
+  -d '{
+    "worker_name": "Test Worker",
+    "trade": "Carpenter",
+    "experience": "5 years",
+    "location": "Chennai",
+    "job_title": "Senior Carpenter",
+    "company_email": "test@example.com"
+  }'
+
+Expected: Email sent to test@example.com
+
+================================================================================
+CODE CHANGES
+================================================================================
+
+FILES MODIFIED:
+✓ app/routers/job.py
+  - Added httpx import
+  - Added N8N_WEBHOOK_URL constant
+  - Added trigger_n8n_webhook() async function
+  - Updated apply_to_job() to be async
+  - Added webhook trigger after saving application
+
+✓ requirements.txt
+  - Added httpx==0.26.0
+
+================================================================================
+BENEFITS
+================================================================================
+
+✓ Real-time email notifications to companies
+✓ No need to check dashboard constantly
+✓ Professional communication
+✓ Faster response to applications
+✓ Better user experience
+✓ Webhook runs asynchronously (doesn't slow down API)
+✓ Graceful error handling (webhook failure doesn't break application)
+
+================================================================================
+MONITORING
+================================================================================
+
+Check logs for webhook status:
+- Success: "n8n webhook triggered successfully for {email}"
+- Warning: "n8n webhook returned status {code}"
+- Error: "Failed to trigger n8n webhook: {error}"
+
+================================================================================
+🎉 N8N EMAIL INTEGRATION COMPLETE! 🎉
+================================================================================
